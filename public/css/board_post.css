@@ -1,0 +1,124 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+  }
+
+  .post {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 50px;
+    width: 60%;
+  }
+
+  .post-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .post-meta {
+    color: #777;
+    font-size: 14px;
+  }
+
+  .post-content {
+    margin-top: 10px;
+    min-height: 100px;
+  }
+
+  .post-meta::after {
+    content: "";
+    display: block;
+    border-top: 1px solid #0080FF;
+    margin-top: 10px;
+  }
+
+  .actions {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .rating-box {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    background-color: #EFFBFB;
+    padding: 10px;
+    border: 2px solid #A4A4A4;
+    border-radius: 5px;
+  }
+
+  .rating-box .rating {
+    display: flex;
+    align-items: center;
+  }
+
+  .rating-box .rating button {
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .rating-box .rating span {
+    margin-left: 10px;
+  }
+
+  .comment {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+
+  .comment-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .comment-name {
+    margin-right: 15px;
+  }
+
+  .comment-main {
+    margin-right: 10px;
+  }
+
+  .comment-date {
+    color: #777;
+    font-size: 14px;
+    margin-left: auto;
+  }
+  .comment-main textarea {
+      resize: none; /* 크기 조정 비활성화 */
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      resize: none;
+  }
+    .comment-actions input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        resize: none;
+    }
+
+    .comment-submit-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* 배경색 변화 효과 */
+
+    }
+
+    .comment-submit-button:hover {
+      background-color: #0056b3; /* 호버(마우스 오버) 시 배경색 변경 */
+    }
