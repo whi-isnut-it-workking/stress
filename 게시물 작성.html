@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://kit.fontawesome.com/7ce551d979.js" crossorigin="anonymous"></script>
+<style>
+  .form-container {
+    width: 60%;
+    min-width: 800px; /* 최소 너비를 600px로 설정 */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 3px solid #E6E6E6;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin: 20px 0;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+
+  .form-group .input-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form-group .input-container input {
+    width: calc(50% - 5px);
+  }
+
+  .form-group .input-container input[type="password"] {
+    width: calc(50% - 5px);
+    margin-right: 30%;
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: none;
+  }
+
+  .form-group .button-container {
+    margin-top: 20px;
+  }
+
+  .button-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .button-container button.cancel {
+    background-color: #ccc;
+  }
+</style>
+</head>
+<body>
+<div class="form-container">
+  <h2>게시판 글 작성</h2>
+  <form action="post.php" method="post">
+    <div class="form-group">
+      <div class="input-container">
+        <input type="text" id="author" name="author" style="width: 30%;" placeholder="작성자" required>
+        <input type="password" id="password" name "password" style="width: 30%;" placeholder="비밀번호" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" id="title" name="title" placeholder="제목을 입력해 주세요." required>
+    </div>
+    <div class="form-group">
+      <textarea id="content" name="content" rows="20" placeholder="본문을 입력하세요" required></textarea>
+    </div>
+      <form method="post" enctype="multipart/form-data">
+        <div class="button">
+        </div>
+        <i class="fa-solid fa-image"></i>
+        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+      </form>
+    <div class="form-group button-container">
+      <button type="submit">등록</button>
+      <button type="button" class="cancel">취소</button>
+    </div>
+  </form>
+</div>
+    <script>  
+        //https://velog.io/@minkyeong-ko/HTMLCSSJS-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%A6%84-%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0-%ED%99%94%EB%A9%B4%EC%97%90-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0
+        function loadFile(input) {
+            var file = input.files[0];	//선택된 파일 가져오기
+
+            //미리 만들어 놓은 div에 text(파일 이름) 추가
+            var name = document.getElementById('fileName');
+            name.textContent = file.name;
+
+            //새로운 이미지 div 추가
+            var newImage = document.createElement("img");
+            newImage.setAttribute("class", 'img');
+
+            //이미지 source 가져오기
+            newImage.src = URL.createObjectURL(file);   
+
+            newImage.style.width = "70%";
+            newImage.style.height = "70%";
+            newImage.style.visibility = "hidden";   //버튼을 누르기 전까지는 이미지를 숨긴다
+            newImage.style.objectFit = "contain";
+
+            //이미지를 image-show div에 추가
+            var container = document.getElementById('image-show');
+            container.appendChild(newImage);
+        };
+    </script> 
+</body>
+</html>
