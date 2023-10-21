@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+  }
+
+  .post {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 50px;
+    width: 60%;
+  }
+
+  .post-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .post-meta {
+    color: #777;
+    font-size: 14px;
+  }
+
+  .post-content {
+    margin-top: 10px;
+    min-height: 100px;
+  }
+
+  .post-meta::after {
+    content: "";
+    display: block;
+    border-top: 1px solid #0080FF;
+    margin-top: 10px;
+  }
+
+  .actions {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .rating-box {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    background-color: #EFFBFB;
+    padding: 10px;
+    border: 2px solid #A4A4A4;
+    border-radius: 5px;
+  }
+
+  .rating-box .rating {
+    display: flex;
+    align-items: center;
+  }
+
+  .rating-box .rating button {
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .rating-box .rating span {
+    margin-left: 10px;
+  }
+
+  .comment {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+
+  .comment-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .comment-name {
+    margin-right: 15px;
+  }
+
+  .comment-main {
+    margin-right: 10px;
+  }
+
+  .comment-date {
+    color: #777;
+    font-size: 14px;
+    margin-left: auto;
+  }
+  .comment-main textarea {
+      resize: none; /* 크기 조정 비활성화 */
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      resize: none;
+  }
+    .comment-actions input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        resize: none;
+    }
+
+    .comment-submit-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* 배경색 변화 효과 */
+
+    }
+
+    .comment-submit-button:hover {
+      background-color: #0056b3; /* 호버(마우스 오버) 시 배경색 변경 */
+    }
+
+</style>
+</head>
+<body>
+<div class="post">
+  <div class="post-title">게시판 글 제목</div>
+  <div class="post-meta">
+    작성자: 게시자 이름 | 작성일: 2023-10-17
+  </div>
+  <div class="post-content">
+    글 내용이 여기에 들어갑니다. 여러 줄로 길게 작성될 수 있습니다.
+  </div>
+  <div class="actions">
+    <div class="rating-box">
+      <div class="rating">
+        <span style="margin: 10px;">10</span>
+        <button id="likeButton" style="background-color: #007bff;">추천</button>
+      </div>
+      <div class="rating">
+        <button id="dislikeButton" style="background-color: #BDBDBD;">비추</button>
+        <span style="margin: 10px;">20</span>
+      </div>
+    </div>
+  </div>
+    <div class="comment">
+        <div class="comment-info">
+          <div class="comment-name">작성자</div>
+          <div class="comment-main">본문</div>
+          <div class="comment-date">2023-10-17 14:30</div>
+        </div>
+    </div>
+    <div class="comment">
+  <div class="comment-main">
+    <textarea placeholder="댓글을 작성하세요" rows="4" cols="50"></textarea>
+  </div>
+  <div class="comment-actions">
+    <input type="text" placeholder="이름" required>
+    <input type="password" placeholder="비밀번호" required>
+    <button class="comment-submit-button">댓글 등록</button>
+  </div>
+</div>
+</div>
+</body>
+</html>
+
