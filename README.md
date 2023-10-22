@@ -75,3 +75,4 @@ Required : Github Oraganization을 만들고 레포지토리를 생성한다. �
 ### Writing Commit Messages
 [Reference](https://velog.io/@msung99/Git-Commit-Message-Convension)  
 (나중에 작성)
+  Test
