@@ -68,8 +68,8 @@ Required : Github Oraganization을 만들고 레포지토리를 생성한다. �
       git checkout main
       git pull origin main
   ```
-  - 로컬 브랜치 삭제(필수 아님) : git branch -D dev
-  - 원격 브랜치 삭제(필수 아님) : git push origin --delete dev
+  - 로컬 브랜치 삭제(필수 아님) : ```git branch -D dev```
+  - 원격 브랜치 삭제(필수 아님) : ```git push origin --delete dev```
 8. 이후 작업 : 코딩하기 전에 항상 자신의 Github repository에서 Sync fork 버튼을 확인하고, 활성화되어 있다면 버튼을 눌러 동기화하자. 그리고 ```git pull origin main```을 통해 로컬과 동기화를 시킨 후 3번 ~ 7번 작업을 반복한다.
   
 ### Writing Commit Messages
