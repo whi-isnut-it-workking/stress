@@ -61,6 +61,7 @@ Required : Github Oraganization을 만들고 레포지토리를 생성한다. �
 (이후로는 원본 저장소의 관리자가 할 일)
   
 6. 코드 리뷰 및 Merge PR : 원본 저장소 관리자는 PR을 받으면 변경내역을 확인하고 Merge 여부를 결정한다.
+  - Github Oraganization의 repository에 브랜치를 여러개 만드는 것이 아니었다. 협업 계정은 main 브랜치 하나만 유지하고 각자의 레포지토리에서 dev 브랜치로 작업하는 것
 7. Merge 이후 동기화 및 branch 삭제 : 원본 저장소에 Merge가 완료되면 로컬 ```main``` 브랜치와 원본 저장소의 코드를 동기화해야 한다.
   - 현재 변경 사항은 dev 브랜치에서 작성하여 적용되었으니, main 브랜치도 내용을 동기화한다. 자신의 Github repository에 들어가 브랜치가 main임을 확인하고, Sync fork를 눌러 Update branch 버튼을 누르자.
   - 이후, 로컬에 있는 main 브랜치와도 동기화를 시키기 위해 아래 명령어를 실행하자.
