@@ -1,7 +1,7 @@
 # stress
 캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 '텍스트 인사이트를 통한 트렌드 분석'의 웹 개발 프로젝트
 
-문서 작성자 : ikaman
+문서 작성자 : ikaman  
 참여인원 : 3명  
 작업 기간 : 2023.08.20~2023.11.27  
 사용 기술 : Data analysis(Python), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2)  
