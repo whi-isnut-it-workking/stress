@@ -7,7 +7,7 @@
 사용 기술 : Data analysis(Python), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2)  
   
 프로젝트 목표:
-1. 웹 사이트를 실제로 서비스 가능한 MVP 수준까지 개발
+1. 웹 사이트를 실제로 서비스 가능한 POC（Proof of Concept)까지 개발
 2. 텍스트 데이터 분석의 기본적인 개념 및 개발 방법 학습
 3. 클라우드 서비스를 이용한 서버 구축과 배포 방법 학습
 4. Git, Github을 이용한 효율적인 협업 방식 학습
