@@ -126,7 +126,7 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 2. File --> Load private key 버튼을 눌러서 pem 파일을 불러오고 save private key 버튼을 누른다.
   - 저장 위치는 로컬디스크 C드라이브 안에 'aws'라는 폴더를 만들고 그 안에 ppk 파일을 보관하는 것이 국룰이다.(필수는 아님)
 3. putty 프로그램을 실행한다.
-  - putty 윈도우 OS에서 서버에 접속할 때 주로 사용하는 툴
+  - putty : 윈도우 OS에서 서버에 접속할 때 주로 사용하는 툴
 4. Connect --> SSH --> Auth 를 클릭하고 Browse 버튼을 눌러 변환한 ppk 파일을 선택한다.
   - 만약 이 위치에 Browse 버튼이 없다면 auth 하위 메뉴 credentials 메뉴에서 찾을 것(버전에 따라 다름)
 5. Session에 들어가서 주소와 포트번호를 입력한다. 적당히 이름을 지어주고 save를 누르면 설정 정보가 저장된다. 다음 연결부터는 이름을 클릭하고 Load 한다.
