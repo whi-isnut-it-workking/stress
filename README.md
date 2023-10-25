@@ -1,10 +1,10 @@
 # stress
-캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 '텍스트 인사이트를 통한 트렌드 분석'의 웹 개발 프로젝트
+캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 웹 개발 Repository
 
-문서 작성자 : ikaman3  
-참여인원 : 3명  
+문서 작성자 : 윤준현(ikaman3)  
+참여인원 : 3명 - 팀장 강민호(SincereSnail), 이민재(dlalswo5644), 윤준현(ikaman3)  
 작업 기간 : 2023.09.20~2023.11.27  
-사용 기술 : Data analysis(Python), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2)  
+사용 기술 : Data analysis(Python, Tensorflow, KoNLPy), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2), DB(AWS RDS, MySQL)  
   
 프로젝트 목표:
 1. 웹 사이트를 POC(Proof of Concept)까지 개발
@@ -75,4 +75,73 @@ Required : Github Oraganization을 만들고 레포지토리를 생성한다. �
   
 ### Writing Commit Messages
 [Reference](https://velog.io/@msung99/Git-Commit-Message-Convension)  
-(나중에 작성)  
+  
+이 프로젝트 규모가 커밋 메시지에 대한 강한 규약까지는 필요하지 않을 것 같음. 커밋할 때 타입과 제목 정도에만 신경쓰고 설명이 더 필요하다면 본문 정도만 작성하는 것으로 충분해보임.  
+  
+커밋 메시지는 제목, 본문(옵션), 꼬리말(옵션)로 구성한다.  
+- type : 어떤 의도로 커밋했는지를 type 에 명시한다.(ex. feat, fix, docs)
+- subject : 제목. 코드 변경사항에 대한 짧은 요약을 나타낸다.
+- body : 긴 설명이 필요한 경우에만 본문 내용으로써 작성한다. 어떻게 작성했는지가 아닌, 무엇을 왜 했는지 를 작성한다. 즉, 부연설명이 필요하거나 커밋의 이유를 설명할 경우 작성한다.
+- footer : issue tracker ID 를 명시하고 싶은 경우에 작성한다.
+  
+타입(Commit Type) : 아래와 같은 규약을 지켜 작성한다.
+  - 타입은 '태그(tag) + 제목(subject)'으로 구성되며, 태그는 영어로 쓰되, 첫 문자는 대문자로 한다.
+  - '태그: 제목'의 형태이며, ':' 뒤에 space가 있음에 유의
+  - ex) Feat: board api
+  
+자주 사용하는 태그 종류
+  - Feat : 새로운 기능을 추가하는 경우
+  - Fix : 버그를 고친경우
+  - Docs : 문서를 수정한 경우
+  - Style : 코드 포맷 변경, 세미콜론 누락, 코드 수정이 없는경우
+  - Refactor : 코드 리펙토링
+  - Test : 테스트 코드. 리펙토링 테스트 코드를 추가했을 때
+  - Chore : 빌드 업무 수정, 패키지 매니저 수정
+  - Design : CSS 등 사용자가 UI 디자인을 변경했을 때
+  - Rename : 파일명(or 폴더명) 을 수정한 경우
+  - Remove : 코드(파일) 의 삭제가 있을 때.
+  
+(이후 본문, 꼬리말에 대한 내용은 우리한테 과하다고 생각해서 제외함)  
+  
+## SSH를 이용한 Server 접속 방법
+Linux and MacOS  
+1. 서버 관리자에게 AWS Keypair 파일(filename.pem or filename.ppk)과 본인의 리눅스 아이디, 서버의 퍼블릭 IP 주소를 받는다.
+2. 터미널에서 pem 파일의 권한을 조정한다(읽기만 가능한 파일로) : ```chmod 400 keypair.pem```
+3. 키페어 파일이 있는 위치로 이동하고 SSH 명령어를 실행한다 : ```ssh -i "keypair.pem" username@서버IP주소```
+  - -i : RSA 인증을 위한 비밀 키를 읽어 올 아이덴티티 파일을 선택하는 옵션
+  - username : 서버 관리자가 생성해둔 본인의 리눅스 아이디를 입력
+  - 서버IP주소 : 서버 관리자가 알려준 서버의 퍼블릭 IP 주소를 입력
+  - ex) ```ssh -i "mykeypair.pem" link@10.255.255.1```
+4. 처음 연결에 성공하면 확인메시지가 나온다. 'yes'를 입력한다
+
+Windows  
+  
+Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파일로 변환해야 한다.  
+서버는 대부분이 리눅스이기 때문에 pem으로 다운받고 윈도우 사용자가 변환해서 사용하는 것이 일반적임.  
+아래의 링크에서 putty를 다운받는다.  
+[putty download](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)  
+
+1. 설치가 끝났다면 윈도우 시작버튼을 누르고 'PuTTYgen'을 검색해서 실행한다.
+  - PuTTY Key Generator : PEM 파일을 PPK파일로 전환하는 프로그램
+2. File --> Load private key 버튼을 눌러서 pem 파일을 불러오고 save private key 버튼을 누른다.
+  - 저장 위치는 로컬디스크 C드라이브 안에 'aws'라는 폴더를 만들고 그 안에 ppk 파일을 보관하는 것이 국룰이다.(필수는 아님)
+3. putty 프로그램을 실행한다.
+  - putty 윈도우 OS에서 서버에 접속할 때 주로 사용하는 툴
+4. Connect --> SSH --> Auth 를 클릭하고 Browse 버튼을 눌러 변환한 ppk 파일을 선택한다.
+  - 만약 이 위치에 Browse 버튼이 없다면 auth 하위 메뉴 credentials 메뉴에서 찾을 것(버전에 따라 다름)
+5. Session에 들어가서 주소와 포트번호를 입력한다. 적당히 이름을 지어주고 save를 누르면 설정 정보가 저장된다. 다음 연결부터는 이름을 클릭하고 Load 한다.
+  - 주소 : 서버의 퍼블릭 IP 주소
+  - Port : 접근할 포트 번호. SSH는 기본적으로 22번 포트를 사용하지만 서버측 설정에 따라 달라질 수 있다. 22를 입력
+6. Open 버튼을 눌러 접속한다.
+
+## RDS 접속 방법
+위의 [SSH를 이용한 Server 접속 방법](https://github.com/whi-isnut-it-workking/stress/edit/main/README.md#ssh를-이용한-server-접속-방법)을 먼저 수행한다.  
+  
+서버 터미널에 아래의 mysql 명령어를 입력하여 접속한다.  
+```mysql -u username -p -h Endpoint```
+- -u username : 사용자를 지정하는 옵션. 서버 관리자가 생성해둔 본인의 아이디를 입력
+- -p : password 입력 옵션
+- -h : Host name을 지정하는 옵션. 서버 관리자가 알려준 RDS의 Endpoint를 입력한다
+- ex) ```mysql -u zelda -p -h mydb.tearsofthekingdom.ap-northeast-2.rds.amazonaws.com```
+
+
