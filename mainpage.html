@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 페이지 예제</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #9CB4D4;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            border-bottom: 10px solid #75F46B;
+        }
+
+        .navbar a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .navbar a:first-child {
+            float: left;
+            margin-left: 9%;
+        }
+
+        .navbar .menu:hover {
+            color: #F1EBEA;
+        }
+
+        .main_box {
+            padding: 10px;
+            background-color: white;
+            border: 2px solid #000;
+        }
+        
+        .main {
+            display: flex;
+            flex-direction: column;
+            margin-top: 100px;
+        }
+
+        .main a {
+            margin-top: 30px;
+            margin-left: 30px; 
+            font-size: 30px;
+        }
+
+        .cycle_box {
+            margin: 30px;
+            margin-bottom: 60px;
+            width: 1500px;
+            height: 780px;
+            background-color: #f0f0f0;
+            position: relative; 
+            border:  1px solid #000;
+        }
+
+        .cycle_box img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .button_container  {
+            position: absolute;
+            top: 20%; 
+            left: 10%;
+            transform: translateX(-50%);
+        }
+
+        .circle_button {
+            width: 17px;
+            height: 17px;
+            background-color: red;
+            border-radius: 50%;
+            color: white;
+            line-height: 100px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .API_Centric .circle_button {  
+            top: 69px; 
+            left: 366px; 
+        }
+
+        .API_Centric .yellow_circle {
+            top: 200px; 
+            left: 260px;
+        }
+
+        .Generative_AI .circle_button {   
+            top: 62px; 
+            left: 390px; 
+        }
+
+        .Generative_AI .yellow_circle {
+            top: 80px;
+            left: 350px;
+        }
+
+        .yellow_circle {
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            background-color: yellow;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .gallery {
+            width: 250px;
+            height: 250px;
+            min-width: 250px;
+            background-color: #999;
+            display: inline-block;
+            margin: 30px;
+        }
+
+        .gallery_container {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">외않됀데</a>
+        <a href="#" class="menu" style="margin-right: 8%;">검섹어 트랜드</a>
+        <a href="#" class="menu">겔러리</a>
+    </div>
+
+    <div class="main">
+        <div class="main_box">
+            <a>2023년 10월 신흥 기술 하이퍼 사이클 비교</a>
+            <div class="cycle_box">
+                <img src="C:\Users\dlals\Desktop\디자인\cycle.png" alt="이미지">
+                <div class="button_container">
+                    <div class="API_Centric">
+                        <div class="circle_button"></div>
+                        <div class="yellow_circle"></div>
+                    </div>
+                    <div class="Generative_AI">
+                        <div class="circle_button"></div>
+                        <div class="yellow_circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a>인기 갤러리</a>
+        <div class="gallery_container">
+            <div class="gallery">
+            </div>
+
+            <div class="gallery">
+            </div>
+
+            <div class="gallery">
+            </div>
+
+            <div class="gallery">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiCentricContainers = document.querySelectorAll('.API_Centric');
+        const apiCentricYellowCircle = document.querySelector('.API_Centric .yellow_circle');
+
+        const generativeAIContainers = document.querySelectorAll('.Generative_AI');
+        const generativeAIYellowCircle = document.querySelector('.Generative_AI .yellow_circle');
+
+        // API-Centric 버튼 이벤트
+        apiCentricContainers.forEach(apiCentricContainer => {
+            apiCentricContainer.addEventListener('mouseenter', () => {
+                apiCentricYellowCircle.style.display = 'block';
+                generativeAIContainers.forEach(generativeAIContainer => {
+                    const generativeAIButtons = generativeAIContainer.querySelectorAll('.circle_button');
+                    generativeAIButtons.forEach(button => {
+                        button.style.display = 'none';
+                    });
+                });
+            });
+
+            apiCentricContainer.addEventListener('mouseleave', () => {
+                apiCentricYellowCircle.style.display = 'none';
+                generativeAIContainers.forEach(generativeAIContainer => {
+                    const generativeAIButtons = generativeAIContainer.querySelectorAll('.circle_button');
+                    generativeAIButtons.forEach(button => {
+                        button.style.display = 'block';
+                    });
+                });
+            });
+        });
+
+        // Generative AI 버튼 이벤트
+        generativeAIContainers.forEach(generativeAIContainer => {
+            generativeAIContainer.addEventListener('mouseenter', () => {
+                generativeAIYellowCircle.style.display = 'block';
+                apiCentricContainers.forEach(apiCentricContainer => {
+                    const apiCentricButtons = apiCentricContainer.querySelectorAll('.circle_button');
+                    apiCentricButtons.forEach(button => {
+                        button.style.display = 'none';
+                    });
+                });
+            });
+
+            generativeAIContainer.addEventListener('mouseleave', () => {
+                generativeAIYellowCircle.style.display = 'none';
+                apiCentricContainers.forEach(apiCentricContainer => {
+                    const apiCentricButtons = apiCentricContainer.querySelectorAll('.circle_button');
+                    apiCentricButtons.forEach(button => {
+                        button.style.display = 'block';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
