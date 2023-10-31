@@ -1,7 +1,9 @@
 # stress
-캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 웹 개발 Repository
-
 문서 작성자 : 윤준현(ikaman3)  
+최종 수정일 : 2023.10.31  
+  
+캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 웹 개발 Repository  
+  
 참여인원 : 3명 - 팀장 강민호(SincereSnail), 이민재(dlalswo5644), 윤준현(ikaman3)  
 작업 기간 : 2023.09.20~2023.11.27  
 사용 기술 : Data analysis(Python, Tensorflow, KoNLPy), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2), DB(AWS RDS, MySQL)  
@@ -137,7 +139,7 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 ## RDS 접속 방법
 위의 [SSH를 이용한 Server 접속 방법](https://github.com/whi-isnut-it-workking/stress/edit/main/README.md#ssh를-이용한-server-접속-방법)을 먼저 수행한다.  
   
-서버 터미널에 아래의 mysql 명령어를 입력하여 접속한다.  
+**서버에 접속하고, 서버의 터미널에** 아래 mysql 명령어를 입력하여 접속한다.  
 ```mysql -u username -p -h Endpoint```
 - -u username : 사용자를 지정하는 옵션. 서버 관리자가 생성해둔 본인의 아이디를 입력
 - -p : password 입력 옵션
