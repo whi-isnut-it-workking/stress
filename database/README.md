@@ -7,7 +7,7 @@
 ## db_config.json
 db.py에서 DB에 접근하기 위해 읽어들이는 URL 정보가 담겨있는 json 파일.  
 **!!!절 대 Github Public Repository에 올라가지 않도록 할 것!!!**  
-.gitignore 파일에 'db_config*'으로 추가되어 있어 파일 이름을 똑같이 맞추어 외부에 공개되지 않도록 할 것.  
+.gitignore 파일에 'db_config*'으로 추가되어 있으므로 파일 이름을 똑같이 맞추어 외부에 공개되지 않도록 할 것.  
   
 ## db_setting_backup.json
 db_config.json 파일의 형식만 저장해둔 파일.  
