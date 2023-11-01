@@ -145,5 +145,3 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 - -p : password 입력 옵션
 - -h : Host name을 지정하는 옵션. 서버 관리자가 알려준 RDS의 Endpoint를 입력한다
 - ex) ```mysql -u zelda -p -h mydb.tearsofthekingdom.ap-northeast-2.rds.amazonaws.com```
-
-
