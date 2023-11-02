@@ -6,6 +6,7 @@ class BoardBase(BaseModel):
 
 class BoardCreate(BoardBase):
     password: str
+    title: str
 
 
 class Board(BoardBase):

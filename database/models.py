@@ -1,4 +1,4 @@
-from sqlalchemy import *
+from sqlalchemy import Column, INT, VARCHAR, DATETIME
 from sqlalchemy.orm import relationship
 
 from .db import Base
