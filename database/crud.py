@@ -5,6 +5,14 @@ from . import models, schemas
 def get_board(db: Session):
     return db.query(models.Board).first()
 
+def create_board(db: Session, board: schemas.BoardCreate):
+    fake_hashed_password = board.password + "notreally"
+    db_board = models.Board(title="Random title", body="한글로 작성한 본문", password=fake_hashed_password)
+    db.add(db_board)
+    db.commit()
+    db.refresh(db_board)
+    return db_board
+
 # def get_user(db: Session, user_id: int):
 #     return db.query(models.User).filter(models.User.id == user_id).first()
 

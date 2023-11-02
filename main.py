@@ -1,30 +1,49 @@
-from typing import Union
-from fastapi import FastAPI
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-from collections import Counter
-from konlpy.tag import Okt
-from PIL import Image
-import numpy as np
-import konlpy
-from konlpy.tag import Komoran
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy.orm import Session
+
+from database import schemas, crud, models
+from database.db import SessionLocal, engine
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        print("DB Session Connected")
+        yield db
+    finally:
+        print("DB Session Closed")
+        db.close()
+
+@app.get("/boards/", response_model=schemas.Board)
+def read_board(db: Session = Depends(get_db)):
+    db_board = crud.get_board(db)
+    return db_board
+
+@app.post("/boards/", response_model=schemas.Board)
+def create_board(board: schemas.BoardCreate, db: Session = Depends(get_db)):
+    return crud.create_board(db=db, board=board)
+
+# @app.post("/users/", response_model=schemas.User)
+# def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+#     db_user = crud.get_user_by_email(db, email=user.email)
+#     if db_user:
+#         raise HTTPException(status_code=400, detail="Email already registered")
+#     return crud.create_user(db=db, user=user)
 
 
-@app.get("/test")
-def test() :
-    with open('testfile.txt', 'r', encoding='utf-8') as f:
-        text = f.read()
+# @app.get("/users/", response_model=list[schemas.User])
+# def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+#     users = crud.get_users(db, skip=skip, limit=limit)
+#     return users
 
-    okt = Okt(max_heap_size= 1024 * 6)
-    nouns = okt.nouns(text) # 명사만 추출
 
-    words = [n for n in nouns if len(n) > 1] # 단어의 길이가 1개인 것은 제외
-
-    c = Counter(words) # 위에서 얻은 words를 처리하여 단어별 빈도수 형태의 딕셔너리 데이터를 구함
-    return c
+# @app.get("/users/{user_id}", response_model=schemas.User)
+# def read_user(user_id: int, db: Session = Depends(get_db)):
+#     db_user = crud.get_user(db, user_id=user_id)
+#     if db_user is None:
+#         raise HTTPException(status_code=404, detail="User not found")
+#     return db_user
