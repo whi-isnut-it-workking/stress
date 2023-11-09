@@ -1,13 +1,15 @@
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+from .models import board
+
+from . import schemas
 
 def get_board(db: Session):
-    return db.query(models.Board).first()
+    return db.query(board.Board).first()
 
 def create_board(db: Session, board: schemas.BoardCreate):
     fake_hashed_password = board.password + "notreally"
-    db_board = models.Board(title="Random title", body="한글로 작성한 본문", password=fake_hashed_password)
+    db_board = board.Board(title="Random title", body="한글로 작성한 본문", password=fake_hashed_password)
     db.add(db_board)
     db.commit()
     db.refresh(db_board)
