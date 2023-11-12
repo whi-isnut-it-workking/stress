@@ -1,32 +1,10 @@
-from fastapi import Depends, FastAPI, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import FastAPI, HTTPException
 
-from database import schemas, crud
-from database.db import SessionLocal, engine
-from stress.database.models import board
-
-board.Base.metadata.create_all(bind=engine)
+from apis import board_router
 
 app = FastAPI()
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        print("DB Session Connected")
-        yield db
-    finally:
-        print("DB Session Closed")
-        db.close()
-
-@app.get("/boards/", response_model=schemas.Board)
-def read_board(db: Session = Depends(get_db)):
-    db_board = crud.get_board(db)
-    return db_board
-
-@app.post("/boards/", response_model=schemas.Board)
-def create_board(board: schemas.BoardCreate, db: Session = Depends(get_db)):
-    return crud.create_board(db=db, board=board)
+app.include_router(router=board_router.router)
 
 # @app.post("/users/", response_model=schemas.User)
 # def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
