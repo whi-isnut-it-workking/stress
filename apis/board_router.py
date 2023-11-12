@@ -23,10 +23,16 @@ def get_db():
         db.close()
 
 # response_model: Pydantic 모델을 반환해야 함. schema.~~ 사용
-@router.get("", response_model=List[schema.Board])
-def read_board(db: Session = Depends(get_db)):
-    db_board = crud.get_board(db)
+# {board_id:int}: Path Parameter의 type을 명시적으로 지정하는 FastAPI의 기능
+@router.get("/{board_id:int}", response_model=schema.Board)
+def read_one_board(board_id: int, db: Session = Depends(get_db)):
+    db_board = crud.get_one_board(db, id=board_id)
     return db_board
+
+@router.get("/all", response_model=List[schema.Board])
+def read_all_board(db: Session = Depends(get_db)):
+    db_board_list = crud.get_all_board(db)
+    return db_board_list
 
 @router.post("", response_model=schema.Board)
 def create_board(board: schema.BoardCreate, db: Session = Depends(get_db)):
