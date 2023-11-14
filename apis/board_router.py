@@ -30,6 +30,7 @@ def get_current_user_password(password: Header = Depends(get_password_from_heade
 
 # response_model: Pydantic 모델을 반환해야 함. schema.~~ 사용
 # {board_id:int}: Path Parameter의 type을 명시적으로 지정하는 FastAPI의 기능
+# tags: FastAPI docs의 라우트별 태그 구분
 ##########################################################
 # id와 일치하는 게시글 한 개를 읽는 API
 # 일치하는 id가 없을 경우 상태 코드 404 반환
@@ -47,7 +48,7 @@ def get_current_user_password(password: Header = Depends(get_password_from_heade
 #     "tag": "string"
 # }
 ##########################################################
-@router.get("/{board_id:int}", response_model=schema.Board)
+@router.get("/{board_id:int}", response_model=schema.Board, tags=["boards"])
 def read_one_board_api(board_id: int, db: Session = Depends(get_db)):
     db_board = crud.get_one_board(db, id=board_id)
     return db_board
@@ -82,7 +83,7 @@ def read_one_board_api(board_id: int, db: Session = Depends(get_db)):
 #   }
 # ]
 ##########################################################
-@router.get("/all", response_model=List[schema.Board])
+@router.get("/all", response_model=List[schema.Board], tags=["boards"])
 def read_all_board_api(db: Session = Depends(get_db)):
     db_board_list = crud.get_all_board(db)
     return db_board_list
@@ -111,7 +112,7 @@ def read_all_board_api(db: Session = Depends(get_db)):
 #   "tag": null
 # }
 ##########################################################
-@router.post("", response_model=schema.BoardCreate)
+@router.post("", response_model=schema.BoardCreate, tags=["boards"])
 def create_board_api(board: schema.BoardCreate, db: Session = Depends(get_db)):
     return crud.create_board(db=db, board=board)
 
@@ -140,7 +141,7 @@ def create_board_api(board: schema.BoardCreate, db: Session = Depends(get_db)):
 # 
 # Error ex) 404 = id 불일치, 401 = 비밀번호 불일치
 ##########################################################
-@router.patch("/{board_id:int}", response_model=schema.BoardUpdate)
+@router.patch("/{board_id:int}", response_model=schema.BoardUpdate, tags=["boards"])
 def update_board_api(
     board_id: int, 
     update_data: schema.BoardUpdate, 
@@ -171,7 +172,7 @@ def update_board_api(
 # }
 # Error ex) 404 = id 불일치, 401 = 비밀번호 불일치
 ##########################################################
-@router.delete("/{board_id:int}", response_model=schema.BoardDelete)
+@router.delete("/{board_id:int}", response_model=schema.BoardDelete, tags=["boards"])
 def delete_board_api(
     board_id: int, 
     password: str = Depends(get_current_user_password), 
