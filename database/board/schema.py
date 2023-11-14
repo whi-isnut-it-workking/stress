@@ -1,32 +1,36 @@
-# schema.py
 from typing import Optional
 from datetime import datetime
 from pydantic import BaseModel
 
 class BoardBase(BaseModel):
-    title: str
-    body: str
-    password: str
-    tag: Optional[str]
 
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True  # Pydantic이 datetime을 처리하도록 하는 옵션
         extra = "forbid"
 
-class BoardCreate(BoardBase):
+class Board(BoardBase):
+    id: int
     title: str
     body: str
     username: str
-    password: str
-    tag: Optional[str]
-
-class Board(BoardBase):
-    id: int
     date: datetime
     recomment: int
     disapproval: int
     views: int
+    tag: Optional[str] = None
 
-    class Config:
-        orm_mode = True
+class BoardCreate(BoardBase):
+    title: str = "title"
+    body: str = "body"
+    username: str = "ㅇㅇ"
+    password: str = "pwd"
+    tag: Optional[str] = None
+
+class BoardUpdate(BoardBase):
+    title: Optional[str] = None
+    body: Optional[str] = None
+    tag: Optional[str] = None
+
+class BoardDelete(Board):
+    pass
