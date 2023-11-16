@@ -1,9 +1,10 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from database.board import board, schema
+from database.board import schema
+from database import models
 # Board 모델 가져옴
-Board = board.Board
+Board = models.Board
 
 # Error 모음
 def response404():

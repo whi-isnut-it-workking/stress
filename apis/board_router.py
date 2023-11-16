@@ -1,11 +1,12 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, Header, status
+from fastapi import APIRouter, Depends, Header
 from sqlalchemy.orm import Session
 
-from database.board import crud, board, schema
+from database.board import crud, schema
 from database.db import SessionLocal, engine
+from database import models
 
-board.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 # URL 앞을 /board로 지정
 router = APIRouter(
