@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 
 from database.db import Base
 
+# 게시글 모델
 class Board(Base):
     __tablename__ = "board"
 
@@ -20,6 +21,7 @@ class Board(Base):
 
     comments = relationship("Comment", back_populates="board")
 
+# 댓글 모델
 class Comment(Base):
     __tablename__ = "comment"
 
@@ -28,6 +30,6 @@ class Comment(Base):
     date = Column(DateTime, default=datetime.now())
     username = Column(String(14), default="ㅇㅇ")
     password = Column(String(20))
-    board_index = Column(Integer, ForeignKey("board.id"))
+    board_index = Column(Integer, ForeignKey("board.id"), nullable=False)
     
     board = relationship("Board", back_populates="comments")
