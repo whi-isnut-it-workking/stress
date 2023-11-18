@@ -85,7 +85,7 @@ def update_comment_api(
 
 # 댓글 삭제 API
 @router.delete("/{comment_id:int}", response_model=schema.CommentDelete, tags=["comments"])
-def delete_board_api(
+def delete_comment_api(
     board_id: int, 
     comment_id: int,
     comment_password: str = Depends(get_current_user_password), 
