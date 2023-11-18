@@ -31,7 +31,7 @@ def check_comment_by_password(db_comment: Comment, comment_password: str):
     if db_comment.password != comment_password: 
         response_error(STATUS_CODE_401, PASSWORD_NOT_MATCH)
 
-# 특정 id에 해당하는 댓글 읽기 : 필요 없는 기능 같음
+# 특정 id에 해당하는 댓글 읽기
 def get_one_comment(db: Session, comment_id: int, board_id: int):
     check_board_by_id(db, board_id)
 
