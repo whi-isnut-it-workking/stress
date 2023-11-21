@@ -18,7 +18,7 @@ STATUS_CODE_404 = 404
 STATUS_CODE_401 = 401
 
 # Error Response
-def response_error(status_code, detail: str):
+def response_error(status_code: int, detail: str):
     raise HTTPException(status_code=status_code, detail=detail)
 ## 게시글이 존재하는지 확인
 def check_board_by_id(db: Session, board_id: int):

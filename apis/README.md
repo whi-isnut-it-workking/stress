@@ -230,3 +230,15 @@ Response ex)
   "board_index": 28
 }
 ```  
+## utils_router.py
+기타 기능을 위한 API  
+### gpt_answer
+GPT API를 사용해서 답변을 받아옴  
+Gartner의 IT 데이터를 기반으로 답하라고 명령한 상태  
+URL에 Path Parameter 'question'에 질문 입력  
+반환된 문자열에 이스케이프 문자 \\n이 들어있으므로, 사용하기 전에 "\\n"을 "\n"으로 치환해야 함  
+```answerKR = answerKR.replace("\\n", "\n")```  
+Response ex)  
+```
+"GPT의 답변\n\n1.어쩌고\n\n2.저쩌고..."
+```  

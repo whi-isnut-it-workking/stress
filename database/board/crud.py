@@ -15,7 +15,7 @@ STATUS_CODE_404 = 404
 STATUS_CODE_401 = 401
 
 # Error Response
-def response_error(status_code, detail: str):
+def response_error(status_code: int, detail: str):
     raise HTTPException(status_code=status_code, detail=detail)
 ## password가 일치하지 않음. 401 응답 반환
 def check_board_by_password(db_board: Board, password: str):
