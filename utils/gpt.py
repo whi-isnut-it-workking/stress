@@ -11,8 +11,7 @@ client = OpenAI()
 client.api_key = os.getenv("OPENAI_API_KEY")
 
 # Papago 이용해서 한국어를 영어로 번역하는 함수
-def get_translate_KRtoEN(originalText) -> str:
-    print("원본 질문: " + originalText)
+def get_translate_KRtoEN(originalText: str) -> str:
     encText = urllib.parse.quote(originalText)
     data = "source=ko&target=en&text=" + encText
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -39,7 +38,7 @@ def get_translate_KRtoEN(originalText) -> str:
         return "Papago Error"
         
 # Papago 이용해서 영어를 한국어로 번역하는 함수
-def get_translate_ENtoKR(originalText) -> str:
+def get_translate_ENtoKR(originalText: str) -> str:
     encText = urllib.parse.quote(originalText)
     data = "source=en&target=ko&text=" + encText
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -66,7 +65,7 @@ def get_translate_ENtoKR(originalText) -> str:
         return "Papago Error"
 
 # GPT API 이용해서 답변을 받는 함수
-def get_answer(translatedText):
+def get_answer(translatedText: str):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[

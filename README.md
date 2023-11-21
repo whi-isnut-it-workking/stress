@@ -3,38 +3,43 @@
 최종 수정자 : 윤준현  
 최종 수정일 : 2023.11.21  
   
-캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 웹 개발 Repository  
+캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 백엔드 API 저장소  
   
-참여인원 : 3명 - 팀장 강민호(SincereSnail), 이민재(dlalswo5644), 윤준현(ikaman3)  
-작업 기간 : 2023.09.20~2023.11.27  
-사용 기술 : Data analysis(Python, Tensorflow, KoNLPy), Frontend(HTML, CSS, JS), Backend(Python, FastAPI), Server(AWS EC2), DB(AWS RDS, MySQL)  
+참여인원 : 3명 - 윤준현(ikaman3), 이민재(dlalswo5644), 강민호(SincereSnail)  
+작업 기간 : 2023.09.20 ~ 2023.11.26 (약 2개월)  
+사용 기술 : Backend(Python, FastAPI), Data analysis(Python, Tensorflow, KoNLPy), Frontend(HTML, CSS, JS),  Server(AWS EC2), DB(AWS RDS, MySQL)  
   
 프로젝트 목표:
 1. 웹 사이트를 POC(Proof of Concept)까지 개발
 2. 텍스트 데이터 분석의 기본적인 개념 및 개발 방법 학습
-3. 클라우드 서비스를 이용한 서버 구축과 배포 방법 학습
-4. Git, Github을 이용한 효율적인 협업 방식 학습
+3. 클라우드 서비스를 이용한 서버 구축과 배포 학습
+4. Git, Github을 이용한 협업 방식 습득
 5. 원활한 유지보수를 위한 문서화 습관 들이기
     
 ## How to Use
 Required : Python 3.6+
   
 ### Install
-터미널에서 프로젝트의 실행파일이 있는 경로까지 이동하고, 아래의 명령어를 입력하여 필요한 모듈을 설치한다.  
+셸에서 프로젝트의 실행파일이 있는 경로까지 이동하고, 아래의 명령어를 입력하여 필요한 모듈을 설치한다.  
 ```
 pip3 install -r requirements_stress.txt
 ```
-- fastapi : 백엔드 API 개발에 사용하는 프레임워크(Node.js의 express)
-- uvicorn : lightweight(매우 가벼운) ASGI 서버
-    - fastapi framework만으로는 웹 개발을 할 수 없고, ASGI와 호환되는 웹 서버가 필요함
-    - 비동기 방식이 가능한 python web server framework(Fastapi가 대표적)와 application 간의 표준 interface를 제공함
-- wordcloud, matplotlib, konlpy : 데이터 분석에 필요한 모듈
+- requirements_stress.txt : 이 프로젝트에 필요한 Dependency를 모아둔 텍스트 파일
+  - fastapi : 백엔드 API 개발에 사용하는 프레임워크(Node.js의 express)
+  - uvicorn : lightweight(매우 가벼운) ASGI 서버
+      - fastapi framework만으로는 웹 개발을 할 수 없고, ASGI와 호환되는 웹 서버가 필요함
+      - 비동기 방식이 가능한 python web server framework(Fastapi가 대표적)와 application 간의 표준 interface를 제공함
+  - wordcloud, matplotlib, konlpy : 데이터 분석에 필요한 모듈
   
 ### Run
-터미널에 아래의 명령어를 입력하여 서버를 시작한다.
+셸에 아래의 명령어를 입력하여 서버를 시작한다.
 ```
 uvicorn main:app --reload
 ```
+또는  
+```
+python -m uvicorn main:app --reload
+```  
 - main : 파일 main.py (파이썬 "모듈"). 확장자가 .py이라면 다른 이름으로도 가능하다.
 - app : main.py 내부의 app = FastAPI() 줄에서 생성한 오브젝트. 오브젝트 이름을 app 이외의 다른 이름으로 선언했다면 그 이름을 사용한다.
 - --reload : 코드 변경 후 서버 재시작. 개발에만 사용한다.
@@ -47,6 +52,8 @@ python 파일을 저장하여 서버를 reload 해야 수정된 소스코드가 
 http://127.0.0.1:8000/docs  
     
 ## Git & Github collaboration
+.gitignore : 다른 사람과 공유할 필요가 없거나 보안상 공개되면 안 되는 파일, 폴더를 명시하여 Git으로 관리되지 않도록 하는 파일  
+
 ### How to Use Github
 [Reference](https://velog.io/@dongvelop/Github-협업하기-PR부터-merge까지)  
   
@@ -140,7 +147,7 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 ## RDS 접속 방법
 위의 [SSH를 이용한 Server 접속 방법](https://github.com/whi-isnut-it-workking/stress/edit/main/README.md#ssh를-이용한-server-접속-방법)을 먼저 수행한다.  
   
-**서버에 접속하고, 서버의 터미널에** 아래 mysql 명령어를 입력하여 접속한다.  
+**서버에 접속하고, 서버의 셸에서** 아래 mysql 명령어를 입력하여 접속한다.  
 ```mysql -u username -p -h Endpoint```
 - -u username : 사용자를 지정하는 옵션. 서버 관리자가 생성해둔 본인의 아이디를 입력
 - -p : password 입력 옵션
