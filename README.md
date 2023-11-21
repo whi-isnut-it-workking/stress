@@ -1,6 +1,7 @@
 # stress
-문서 작성자 : 윤준현(ikaman3)  
-최종 수정일 : 2023.10.31  
+문서 작성자 : 윤준현  
+최종 수정자 : 윤준현  
+최종 수정일 : 2023.11.21  
   
 캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 웹 개발 Repository  
   
@@ -21,7 +22,7 @@ Required : Python 3.6+
 ### Install
 터미널에서 프로젝트의 실행파일이 있는 경로까지 이동하고, 아래의 명령어를 입력하여 필요한 모듈을 설치한다.  
 ```
-pip3 install fastapi uvicorn wordcloud matplotlib konlpy
+pip3 install -r requirements_stress.txt
 ```
 - fastapi : 백엔드 API 개발에 사용하는 프레임워크(Node.js의 express)
 - uvicorn : lightweight(매우 가벼운) ASGI 서버
