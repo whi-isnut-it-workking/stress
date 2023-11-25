@@ -80,3 +80,23 @@ def delete_board(db: Session, id: int, password: str):
     db.delete(db_board)
     db.commit()
     return db_board
+
+# 추천 증가
+def increment_like(db: Session, id: int):
+    db_board = get_one_board(db, id)
+
+    if db_board:
+        db_board.recomment += 1
+        db.commit()
+        db.refresh(db_board)
+    return db_board
+
+# 비추천 증가
+def increment_dislike(db: Session, id: int):
+    db_board = get_one_board(db, id)
+
+    if db_board:
+        db_board.disapproval += 1
+        db.commit()
+        db.refresh(db_board)
+    return db_board

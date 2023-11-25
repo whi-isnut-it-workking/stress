@@ -44,7 +44,7 @@ def art_crawl(href):
     
     ## 1.
     title_selector = "#title_area > span"
-    image_selector = "#img1"  # 이미지 선택자 추가
+    # image_selector = "#img1"  # 이미지 선택자 추가
 
     url = href
     html = requests.get(url, headers={"User-Agent": "Mozilla/5.0\
@@ -60,18 +60,18 @@ def art_crawl(href):
     
     ## 3.
     # 이미지 URL 수집
-    image = soup.select_one(image_selector)
-    if image and image.has_attr("src"):  # 이미지가 있을 경우에만 URL 가져오기
-        image_url = image["src"]  # 이미지 태그에서 src 속성 가져오기
-    else:
-        image_url = None
+    # image = soup.select_one(image_selector)
+    # if image and image.has_attr("src"):  # 이미지가 있을 경우에만 URL 가져오기
+    #     image_url = image["src"]  # 이미지 태그에서 src 속성 가져오기
+    # else:
+    #     image_url = None
     
     art_dic["href"] = href
     art_dic["title"] = title_str
-    art_dic["image_url"] = image_url
+    # art_dic["image_url"] = image_url
 
-    print(art_dic["href"] , art_dic["title"], art_dic["image_url"])
-    # print(art_dic["href"] , art_dic["title"])
+    # print(art_dic["href"] , art_dic["title"], art_dic["image_url"])
+    print(art_dic["href"] , art_dic["title"])
     return art_dic
 
 @router.get("/gpt", tags=["utils"])
