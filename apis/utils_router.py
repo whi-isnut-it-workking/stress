@@ -22,7 +22,7 @@ SID1_IT = 105
 # 세부 분야: IT/과학 밑의 모바일, 인터넷 등 분야 밑의 세부 분야
 SID2_IT = [731, 226, 227, 230, 732, 283, 229, 228]
 
-### 뉴스 분야(sid1)와 세부 분야(sid2), 페이지(page), 날짜(date)를 입력하면 그에 대한 링크들을 리스트로 추출하고, 랜덤으로 한개 반환하는 함수 ###
+### 뉴스 분야(sid1)와 세부 분야(sid2), 페이지(page), 날짜(date)를 입력하면 그에 대한 링크들을 리스트로 추출하고, 리스트 반환하는 함수 ###
 def ex_tag(sid1, sid2, page, date):
     ## 1.
     url = f"https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1={sid1}&sid2={sid2}&date={date}&page={page}"
@@ -37,7 +37,7 @@ def ex_tag(sid1, sid2, page, date):
             if (f"sid={sid1}" in a["href"]) and ("article" in a["href"]):
                 tag_lst.append(a["href"])
     
-    return random.choice(tag_lst)
+    return tag_lst
 
 def art_crawl(href):
     art_dic = {}
@@ -88,5 +88,12 @@ def get_news():
     date = today.strftime("%Y%m%d")
     sid2s_IT = random.choice(SID2_IT)
 
-    news_url = ex_tag(SID1_IT, sid2s_IT, page=1, date=date)
-    return art_crawl(news_url)
+    all_hrefs = ex_tag(SID1_IT, sid2s_IT, page=1, date=date)
+    # 중복 제거
+    re_set = set(all_hrefs)
+    re_lst = list(re_set)
+    news_list = []
+    for i in range(5):
+        news_list.append(art_crawl(re_lst[i]))
+    
+    return news_list
