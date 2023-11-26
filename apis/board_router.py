@@ -82,3 +82,19 @@ def delete_board_api(
         db=db, 
         id=board_id, 
         password=password)
+
+# 추천 1 증가 API
+@router.patch("/{board_id:int}/like", response_model=schema.Board, tags=["boards"])
+def increment_like(
+    board_id: int, 
+    db: Session = Depends(get_db)
+):
+    return crud.increment_like(db, board_id)
+    
+# 비추천 1 증가 API
+@router.patch("/{board_id:int}/dislike", response_model=schema.Board, tags=["boards"])
+def increment_dislike(
+    board_id: int, 
+    db: Session = Depends(get_db)
+):
+    return crud.increment_dislike(db, board_id)
