@@ -165,4 +165,4 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 ![워드클라우드](./result/3.png)
 ![감정분석](./result/4.png)
 ![관련게시물](./result/5.png)
-![최종발표자료](./result/최종발표_pdf)
+![최종발표자료](./result/최종발표.pdf)
