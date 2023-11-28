@@ -158,11 +158,11 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 - ex) ```mysql -u zelda -p -h mydb.tearsofthekingdom.ap-northeast-2.rds.amazonaws.com```
 
 ## Result
-![메인페이지_상단](./result/0_0.png)
-![메인페이지_하단](./result/0_1.png)
-![하이퍼사이클](./result/1.png)
-![연관어분석](./result/2.png)
-![워드클라우드](./result/3.png)
-![감정분석](./result/4.png)
-![관련게시물](./result/5.png)
-![최종발표자료](./result/최종발표.pdf)
+![메인페이지_상단](result/0_0.png)
+![메인페이지_하단](result/0_1.png)
+![하이퍼사이클](result/1.png)
+![연관어분석](result/2.png)
+![워드클라우드](result/3.png)
+![감정분석](result/4.png)
+![관련게시물](result/5.png)
+![최종발표자료](result/final_presentation.pdf)
