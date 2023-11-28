@@ -43,10 +43,15 @@ uvicorn main:app --reload
 ```
 python -m uvicorn main:app --reload
 ```  
+외부 접근 허용  
+```
+python -m uvicorn main:app --reload --host=0.0.0.0
+```  
 - main : 파일 main.py (파이썬 "모듈"). 확장자가 .py이라면 다른 이름으로도 가능하다.
 - app : main.py 내부의 app = FastAPI() 줄에서 생성한 오브젝트. 오브젝트 이름을 app 이외의 다른 이름으로 선언했다면 그 이름을 사용한다.
 - --reload : 코드 변경 후 서버 재시작. 개발에만 사용한다.
-  
+- --host : 서버가 바인딩될 호스트를 지정하는 데 사용. 서버가 수신 대기할 IP 주소를 나타내며, 기본적으로 127.0.0.1 또는 localhost로 설정된다. ```--host=0.0.0.0```은 모든 네트워크 인터페이스에서 서버가 수신 대기하도록 지정한다. 이렇게 하면 외부에서도 서버에 접근할 수 있게 된다.
+    
 ### API Test Docs
 FastAPI는 Swagger UI를 사용하여 자동 대화형 API 문서를 제공한다. 해당 문서에서 빠르게 API를 테스트할 수 있다.  
 서버를 시작하고 아래의 링크를 브라우저에 입력하여 접속한다.  
