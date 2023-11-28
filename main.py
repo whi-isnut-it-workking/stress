@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from apis import board_router, comment_router, utils_router
+from apis import board, comment, utils
 
 app = FastAPI()
 
@@ -15,6 +15,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.include_router(router=board_router.router)
-app.include_router(router=comment_router.router)
-app.include_router(router=utils_router.router)
+app.include_router(router=board.router)
+app.include_router(router=comment.router)
+app.include_router(router=utils.router)

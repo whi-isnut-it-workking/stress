@@ -6,19 +6,20 @@ import random
 
 from utils.gpt import get_translate_KRtoEN, get_translate_ENtoKR, get_answer
 
-# URL 앞을 /board/{board_id:int}/comment로 지정
 router = APIRouter(
     prefix="/utils"
 )
 
+# Header
 def get_password_from_header(password: str = Header(...)):
     return password
 
 def get_current_user_password(password: Header = Depends(get_password_from_header)):
     return password
 
-# 분야: IT/과학
-SID1_IT = 105
+# Functions
+
+SID1_IT = 105 # 분야: IT/과학
 # 세부 분야: IT/과학 밑의 모바일, 인터넷 등 분야 밑의 세부 분야
 SID2_IT = [731, 226, 227, 230, 732, 283, 229, 228]
 
@@ -74,6 +75,7 @@ def art_crawl(href):
     print(art_dic["href"] , art_dic["title"])
     return art_dic
 
+# APIs
 @router.get("/gpt", tags=["utils"])
 def gpt_answer(question: str):
     # questionEN = get_translate_KRtoEN(question)

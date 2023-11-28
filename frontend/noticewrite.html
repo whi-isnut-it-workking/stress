@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://kit.fontawesome.com/7ce551d979.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <!-- 서머노트를 위해 추가해야할 부분 -->
+    <script src="./summernote-lite.js"></script>
+    <script src="./summernote-ko-KR.js"></script>
+    <script src="./summernote-lite.css"></script>
+    <!--  -->
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar1 {
+            background-color: #9CB4D4;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            border-bottom: 10px solid #75F46B;
+            z-index: 900;
+        }
+
+        .navbar1 a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 0px 20px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .navbar1 a:first-child {
+            float: left;
+            margin-left: 6%;
+        }
+
+        .navbar1 .menu:hover {
+            color: #F1EBEA;
+        }
+
+        .navbar1 img {
+            margin-top: 5px;
+            width: 130px;
+            height: 50px;
+        }
+
+        .navbar1 .menu {
+            margin-top: 15px;
+        }
+        .form-container {
+            width: 80%;
+            min-width: 800px;
+            /* 최소 너비를 600px로 설정 */
+            margin-top: 10%;
+            padding: 20px;
+            background-color: white;
+            border: 3px solid #E6E6E6;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group .input-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group .input-container input {
+            width: calc(50% - 5px);
+        }
+
+        .form-group .input-container input[type="password"] {
+            width: calc(50% - 5px);
+            margin-right: 30%;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            resize: none;
+        }
+
+        .form-group .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button.cancel {
+            background-color: #ccc;
+        }
+        
+        .modal {
+            display: none;
+            /* 기본적으로 모달은 숨겨진 상태 */
+            position: fixed;
+            /* 고정 위치 */
+            z-index: 9999;
+            /* 다른 요소 위에 표시되도록 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* 모달 크기가 화면을 벗어나면 스크롤을 제공 */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 투명도를 조절한 배경색 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            margin: 0 auto;
+            /* 화면 중앙에 위치하도록 수정 */
+            width: 100%;
+            /* 모달 창의 너비 조정 */
+            height: 100%;
+            /* 모달 창의 높이 조정 */
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 50%;
+            /* 이미지 크기를 50%로 축소 */
+            height: auto;
+            /* 가로 세로 비율 유지 */
+            float: left;
+            /* 왼쪽으로 배치 */
+            margin-left: 5%;
+            margin-top: 10%;
+        }
+
+        .cycle_btn {
+            overflow-y: auto;
+            max-height: 50%;
+            /* 버튼들이 표시될 최대 높이 설정 */
+            margin-top: 13%;
+        }
+
+        .scrollable-content {
+            /* 스크롤 가능한 영역 스타일 설정 */
+            display: flex;
+            flex-direction: column;
+            /* 버튼을 수평으로 배치 */
+            justify-content: flex-end;
+            /* 버튼을 오른쪽 끝에 배치 */
+            align-items: center;
+            /* 버튼들을 수직 가운데로 정렬 */
+        }
+
+        .scrollable-content button {
+            background-color: #2E2E2E;
+            color: white;
+            font-size: 25px;
+            width: 500px
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            left: calc(100% - 60px);
+            font-size: 60px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar1">
+        <a href="index.html"><img src="logo.JPG"></a>
+        <a href="noticeboard.html" class="menu" style="margin-right: 8%;">Gallery</a>
+        <a href="#" class="menu" onclick="openModal()">Hype Cycle</a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="cycle.png">
+            <div class="cycle_btn">
+                <div class="scrollable-content">
+                    <button>cybersecurity mesh architecture</button>
+                    <button>generative cybersecurity ai</button>
+                    <button>gitops</button>
+                    <button>augmented finops</button>
+                    <button>neurosymbolic ai</button>
+                    <button>post quantum cryptography</button>
+                    <button>causal ai</button>
+                    <button>ai simulation</button>
+                    <button>graph data science</button>
+                    <button>cloud development environment</button>
+                    <button onclick="redirectToResult('강화학습')">reinforcement learning</button>
+                    <button>value stream management platforms</button>
+                    <button>homomorphic encryption</button>
+                    <button>cloud sustainability</button>
+                    <button>internal developer platform</button>
+                    <button>federated machine learning</button>
+                    <button onclick="redirectToResult('웹어셈블리')">webassembly</button>
+                    <button>ai trism</button>
+                    <button>cloud-out to edge</button>
+                    <button>open-source program office</button>
+                    <button>api-centric saas</button>
+                    <button onclick="redirectToResult('생성형ai')">generative ai</button>
+                    <button>ai augmented software engineering</button>
+                    <button>cloud native</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-container">
+        <h2>게시판 글 작성</h2>
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="author" name="author" style="width: 30%;" placeholder="작성자" required>
+                <input type="password" id="password" name="password" style="width: 30%;" placeholder="비밀번호" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" id="title" name="title" placeholder="제목을 입력해 주세요." required>
+        </div>
+        <textarea class="summernote" id="main_text" name="editordata"></textarea>
+        <div class="form-group button-container">
+            <button class="submit">등록</button>
+            <button class="cancel">취소</button>
+        </div>
+    </div>
+    
+    <script>
+        function redirectToResult(value) {
+            // encodeURIComponent를 사용하여 값에 포함된 특수 문자를 인코딩합니다.
+            const encodedValue = encodeURIComponent(value);
+            // 새로운 URL을 생성하고 해당 페이지로 이동합니다.
+            window.location.href = `result.html?value=${encodedValue}`;
+        }
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.summernote').summernote({
+                placeholder: '본문을 입력해 주세요',
+                height: 450,
+                lang: "ko-KR",
+                toolbar: [
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['codeview']],
+                ]
+            });
+
+            const commentSubmitButton = document.querySelector('.submit');
+
+            commentSubmitButton.addEventListener('click', function() {
+                const author = $('#author').val();
+                const password = $('#password').val();
+                const title = $('#title').val();
+                const mainText = $('#main_text').val();
+
+                const dataToSend = {
+                    title: title,
+                    body: mainText,
+                    username: author,
+                    password: password
+                };
+
+                fetch('http://3.34.107.69:8000/board', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToSend)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // 서버로부터의 응답 처리
+                        console.log('서버로부터의 응답:', data);
+
+                        window.location.href = 'noticeboard.html';
+                    })
+                    .catch(error => {
+                        console.error('데이터를 전송하는 동안 오류 발생:', error);
+                    });
+            });
+        });
+    </script>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

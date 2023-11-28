@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fullPage.js Example</title>
+    <!-- fullPage.js 라이브러리 추가 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: '맑은 고딕', sans-serif;
+        }
+
+        .navbar {
+            background-color: #9CB4D4;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            border-bottom: 10px solid #75F46B;
+            z-index: 900;
+        }
+
+        .navbar a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 0px 20px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .navbar a:first-child {
+            float: left;
+            margin-left: 6%;
+        }
+
+        .navbar .menu:hover {
+            color: #F1EBEA;
+        }
+
+        .navbar img {
+            margin-top: 5px;
+            width: 130px;
+            height: 50px;
+        }
+        
+        .menu {
+            margin-top: 15px;
+        }
+
+        .section {
+            text-align: center;
+            color: white;
+        }
+
+        #section1 {
+            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(170, 248, 153, 1) 100%);
+        }
+
+        #section2 {
+            background: linear-gradient(0deg, rgba(230, 244, 241, 1) 0%, rgba(34, 193, 195, 1) 100%);
+        }
+
+        #section3 {
+            background: linear-gradient(0deg, rgba(252, 252, 212, 1) 0%, rgba(230, 244, 241, 1) 100%);
+        }
+
+        .fp-controlArrow.fp-prev {
+            margin-left: 30px;
+        }
+
+        .fp-controlArrow.fp-next {
+            margin-right: 30px;
+        }
+
+        .img {
+            float: left;
+            width: 55%;
+            margin-left: 2%;
+            display: flex;
+            border: 3px solid black;
+            position: absolute;
+            top: 15%;
+        }
+
+        .img img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+        }
+
+        .QA {
+            float: right;
+            height: 88%;
+            width: 35%;
+            margin-top: 4%;
+        }
+
+        .QA h2 {
+            color: black;
+            text-align: left;
+            margin-left: 15%;
+            font-size: 25px;
+        }
+
+        .gpt {
+            /* 기존 스타일 유지 */
+            /* 수정된 스타일: div 크기에 맞게 모두 표시 */
+            white-space: normal;
+            overflow-y: auto; /* 세로 스크롤만 표시 */
+            max-height: 70%;
+            width: 70%;
+            border: 3px solid black;
+            border-radius: 13px;
+            box-shadow: 8px 10px 13px rgba(0, 0, 0, 0.6);
+            font-size: 20px;
+            padding: 5px;
+            background-color: white;
+            color: black;
+        }
+
+        .button-container {
+            height: 50%;
+            width: 70%;
+        }
+
+        .question-button {
+
+            background-color: #B1DCE3;
+            display: block;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 23px;
+            border-radius: 10px;
+        }
+
+        .question-button:hover {
+            color: #F6CECE;
+        }
+
+        .result {
+            margin: auto;
+            height: 70%;
+            width: 70%;
+            border: 3px solid black;
+            background-color: white;
+            color: black;
+        }
+
+        .result img {
+            max-width: 100%;
+            /* 이미지의 최대 너비를 부모 요소에 맞게 조절 */
+            max-height: 100%;
+            /* 이미지의 최대 높이를 부모 요소에 맞게 조절 */
+            height: auto;
+            /* 이미지 비율 유지 */
+            width: auto;
+            /* 이미지 비율 유지 */
+            align-items: center;
+        }
+
+        .result .positive {
+            float: left;
+        }
+
+        .result .negative {
+            float: right;
+        }
+
+        .positive {
+            background-color: #81DAF5;
+            width: 50%;
+            height: 100%;
+        }
+
+        .negative {
+            background-color: #F78181;
+            width: 50%;
+            height: 100%;
+        }
+
+        .post a {
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s;
+            font-size: 25px;
+        }
+
+        .post a:hover {
+            color: blue;
+        }
+
+
+        .news_gpt {
+            float: left;
+            height: 80%;
+            width: 54%;
+            border: 3px solid black;
+            color: black;
+            margin-top: 5%;
+            margin-left: 3%;
+            border-radius: 13px;
+            box-shadow: 8px 10px 13px rgba(0, 0, 0, 0.6);
+            background-color: white;
+        }
+
+        .news {
+            float: right;
+            height: 88%;
+            width: 40%;
+            color: black;
+            margin-top: 4%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .news h2,
+        .news .newsurl {
+            flex: 1 1 100%;
+            margin: 10px 0;
+        }
+
+        .newsurl {
+            margin-top: 5px;
+        }
+
+        .newsurl img {
+            width: 30%;
+            height: 80%;
+            float: left;
+            margin-left: 8%;
+        }
+
+        .newsurl p {
+            float: right;
+            margin-right: 8%;
+            margin-top: 5%;
+            font-size: 20px;
+        }
+
+        p {
+            color: black;
+        }
+        
+        .modal {
+            display: none;
+            /* 기본적으로 모달은 숨겨진 상태 */
+            position: fixed;
+            /* 고정 위치 */
+            z-index: 9999;
+            /* 다른 요소 위에 표시되도록 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* 모달 크기가 화면을 벗어나면 스크롤을 제공 */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 투명도를 조절한 배경색 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            margin: 0 auto;
+            /* 화면 중앙에 위치하도록 수정 */
+            width: 100%;
+            /* 모달 창의 너비 조정 */
+            height: 100%;
+            /* 모달 창의 높이 조정 */
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 50%;
+            /* 이미지 크기를 50%로 축소 */
+            height: auto;
+            /* 가로 세로 비율 유지 */
+            float: left;
+            /* 왼쪽으로 배치 */
+            margin-left: 5%;
+            margin-top: 10%;
+        }
+
+        .cycle_btn {
+            overflow-y: auto;
+            max-height: 50%;
+            /* 버튼들이 표시될 최대 높이 설정 */
+            margin-top: 13%;
+        }
+
+        .scrollable-content {
+            /* 스크롤 가능한 영역 스타일 설정 */
+            display: flex;
+            flex-direction: column;
+            /* 버튼을 수평으로 배치 */
+            justify-content: flex-end;
+            /* 버튼을 오른쪽 끝에 배치 */
+            align-items: center;
+            /* 버튼들을 수직 가운데로 정렬 */
+        }
+
+        .scrollable-content button {
+            background-color: #2E2E2E;
+            color: white;
+            font-size: 25px;
+            width: 500px
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            left: calc(100% - 60px);
+            font-size: 60px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html"><img src="logo.JPG"></a>
+        <a href="noticeboard.html" class="menu" style="margin-right: 8%;">Gallery</a>
+        <a href="#" class="menu" onclick="openModal()">Hype Cycle</a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="cycle.png">
+            <div class="cycle_btn">
+                <div class="scrollable-content">
+                    <button>cybersecurity mesh architecture</button>
+                    <button>generative cybersecurity ai</button>
+                    <button>gitops</button>
+                    <button>augmented finops</button>
+                    <button>neurosymbolic ai</button>
+                    <button>post quantum cryptography</button>
+                    <button>causal ai</button>
+                    <button>ai simulation</button>
+                    <button>graph data science</button>
+                    <button>cloud development environment</button>
+                    <button onclick="redirectToResult('강화학습')">reinforcement learning</button>
+                    <button>value stream management platforms</button>
+                    <button>homomorphic encryption</button>
+                    <button>cloud sustainability</button>
+                    <button>internal developer platform</button>
+                    <button>federated machine learning</button>
+                    <button onclick="redirectToResult('웹어셈블리')">webassembly</button>
+                    <button>ai trism</button>
+                    <button>cloud-out to edge</button>
+                    <button>open-source program office</button>
+                    <button>api-centric saas</button>
+                    <button onclick="redirectToResult('생성형ai')">generative ai</button>
+                    <button>ai augmented software engineering</button>
+                    <button>cloud native</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fullPage.js 적용할 섹션들 -->
+    <div id="fullpage">
+        <div class="section" id="section1">
+            <div class="img">
+                <img src="cycle.png">
+            </div>
+            <div class="QA">
+                <h2 id="QA1">''란?</h2>
+                <div class="gpt">chatGPT</div>
+                <div class="button-container">
+                    <button class="question-button" id="QA2">''이/가 앞으로 주목받을 것이라고 생각하나요?</button>
+                    <button class="question-button" id="QA3">어떤 곳에 활용되나요?</button>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="slide">
+                <h2>연관어분석</h2>
+                <div class="result" id="ass">
+                </div>
+            </div>
+            <div class="slide">
+                <h2>워드클라우드</h2>
+                <div class="result" id="wordCloudResult">
+                </div>
+            </div>
+            <div class="slide">
+                <h2>감정분석</h2>
+                <div class="result">
+                    <div class="positive">
+                        <h2>긍정</h2>
+                    </div>
+                    <div class="negative">
+                        <h2>부정</h2>
+                    </div>
+                    <div class="emo"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>관련 갤러리 게시물</h2>
+                <div class="result">
+                    <div class="post">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fullPage.js 초기화 스크립트 -->
+    <script>
+        new fullpage('#fullpage', {
+            // 네비게이션
+            navigation: true,
+            navigationPosition: 'right',
+            slidesNavigation: true,
+            slidesNavPosition: 'bottom',
+        });
+    </script>
+
+    <script>
+        function redirectToResult(value) {
+            // encodeURIComponent를 사용하여 값에 포함된 특수 문자를 인코딩합니다.
+            const encodedValue = encodeURIComponent(value);
+            // 새로운 URL을 생성하고 해당 페이지로 이동합니다.
+            window.location.href = `result.html?value=${encodedValue}`;
+        }
+    </script>
+    
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var search = urlParams.get('value');
+
+        // 가져온 값으로 HTML 요소 안에 넣기
+        document.getElementById('QA1').innerText = "'" + search + "'란?";
+        document.getElementById('QA2').innerText = `'${search}'이/가 앞으로 주목받을 것이라고 생각하나요?`;
+    </script>
+
+<script>
+    // URL에서 'value' 매개변수 값을 가져오는 코드
+    var urlParams = new URLSearchParams(window.location.search);
+    var searchValue = urlParams.get('value');
+
+    // 가져온 값이 있을 때만 데이터를 보내는 함수 호출
+    if (searchValue) {
+        const combinedValue = `what is ${searchValue}`;
+        const url = `http://3.34.107.69:8000/utils/gpt?question=${combinedValue}`;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                const gptDiv = document.querySelector('.gpt');
+                gptDiv.textContent = data;
+            })
+            .catch(error => {
+                console.error('데이터를 보내는 중 오류 발생:', error);
+            });
+    }
+
+    // QA 버튼 요소들을 찾아냄
+    const qaButton2 = document.getElementById('QA2');
+    const qaButton3 = document.getElementById('QA3');
+
+    // 가져온 값이 있을 때만 이벤트 리스너를 추가
+    if (searchValue) {
+        // QA 버튼 2 (Do you think '' will receive attention in the future?) 클릭 시 동작
+        qaButton2.addEventListener('click', () => {
+            const question = `Do you think ${searchValue} will receive attention in the future?`;
+
+            // API로 데이터 보내기
+            sendDataToAPI(question);
+        });
+
+        // QA 버튼 3 (Where is '' technology used?) 클릭 시 동작
+        qaButton3.addEventListener('click', () => {
+            const question = `Where is ${searchValue} technology used?`;
+
+            // API로 데이터 보내기
+            sendDataToAPI(question);
+        });
+    }
+
+    // API로 데이터를 전송하고 응답 받는 함수
+    function sendDataToAPI(question) {
+        const url = `http://3.34.107.69:8000/utils/gpt?question=${question}`;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                // 가져온 데이터를 화면에 표시
+            
+                const formattedData = data.replace(/\\n/g, '\n');
+            
+                displayResponse(data);
+            })
+            .catch(error => {
+                console.error('데이터를 보내거나 받는 중 오류 발생:', error);
+            });
+    }
+
+    // API 응답을 받아서 화면에 표시하는 함수
+    function displayResponse(responseData) {
+        // 가져온 데이터를 원하는 위치에 표시
+        const gptDiv = document.querySelector('.gpt');
+        gptDiv.textContent = responseData;
+    }
+</script>
+
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var searchValue = urlParams.get('value');
+        const url = `http://121.128.211.44:8000/ai/result_ass_model?keyword=${searchValue}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const mainWord = searchValue; // 메인 단어
+                const container = document.getElementById('ass');
+
+                // 컨테이너 크기 가져오기
+                const containerRect = container.getBoundingClientRect();
+                const containerWidth = containerRect.width;
+                const containerHeight = containerRect.height;
+
+                const svg = d3.select("#ass")
+                    .append("svg")
+                    .attr("width", containerWidth)
+                    .attr("height", containerHeight);
+
+                const nodes = Array.from(new Set(data.flatMap(d => [d[0], d[1]]))).map(name => ({
+                    name,
+                    isMain: name === mainWord // 메인 단어 여부
+                }));
+
+                const links = data.map(d => ({
+                    source: d[0],
+                    target: d[1],
+                    strength: d[2]
+                }));
+
+                const simulation = d3.forceSimulation(nodes)
+                    .force("link", d3.forceLink(links).id(d => d.name).distance(d => 500 * (1 - d.strength))) // 연관성에 따라 거리 조절
+                    .force("charge", d3.forceManyBody().strength(-200))
+                    .force("center", d3.forceCenter(containerWidth / 2, containerHeight / 2))
+                    .on("tick", ticked);
+
+                const link = svg.selectAll(".link")
+                    .data(links)
+                    .enter().append("line")
+                    .attr("class", "link")
+                    .style("stroke", "black")
+                    .style("stroke-width", 1); // 고정된 선 굵기
+
+                const node = svg.selectAll(".node")
+                    .data(nodes)
+                    .enter().append("g") // 노드 그룹 추가
+                    .attr("class", "node")
+                    .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+
+                node.append("circle")
+                    .attr("r", d => (d.isMain ? 30 : 15)) // 메인 단어인 경우 크기 키우기
+                    .style("fill", d => (d.isMain ? "#2E9AFE" : "#FE2E2E")); // 메인 단어인 경우 파란색으로
+
+                node.append("text")
+                    .attr("dx", d => (d.isMain ? 30 : 20)) // 메인 단어인 경우 더 멀리 표시
+                    .attr("dy", ".35em")
+                    .text(d => d.name);
+
+                node.append("title")
+                    .text(d => d.name);
+
+                function ticked() {
+                    link
+                        .attr("x1", d => d.source.x)
+                        .attr("y1", d => d.source.y)
+                        .attr("x2", d => d.target.x)
+                        .attr("y2", d => d.target.y);
+
+                    node
+                        .attr("transform", d => `translate(${d.x},${d.y})`);
+                }
+
+                function dragstarted(event, d) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y;
+                }
+
+                function dragged(event, d) {
+                    d.fx = event.x;
+                    d.fy = event.y;
+                }
+
+                function dragended(event, d) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null;
+                    d.fy = null;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var searchValue = urlParams.get('value');
+
+        // 워드클라우드 이미지를 받아와서 표시하는 함수
+        function displayWordCloudImage(base64Image) {
+            const wordCloudResult = document.getElementById('wordCloudResult');
+            const imgElement = document.createElement('img');
+            base64Image = base64Image.replace(/"/g, '');
+            imgElement.src = base64Image; // base64 형식의 이미지 데이터 설정
+            imgElement.alt = 'Word Cloud';
+            wordCloudResult.appendChild(imgElement);
+        }
+
+        // 이미지를 받아오는 API 호출
+        const word = searchValue; // 검색하고자 하는 단어
+        const width = 900; // 이미지 너비
+        const height = 600; // 이미지 높이
+        const apiUrl = `http://121.128.211.44:8000/wc/make_wordcloud?keyword=${word}&wd=${width}&hg=${height}`;
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // API가 반환한 base64 이미지 데이터를 텍스트로 받음
+            })
+            .then(base64ImageData => {
+                displayWordCloudImage(base64ImageData); // 이미지 표시 함수 호출
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        const url1 = `http://121.128.211.44:8000/ai/result_emo_model?keyword=${searchValue}`;
+        fetch(url1)
+            .then(response => response.json()) // JSON 형식으로 변환
+            .then(data => {
+                const positiveDiv = document.querySelector('.positive');
+                const negativeDiv = document.querySelector('.negative');
+
+                // 긍정 요소 생성
+                const positiveList = data['긍정'].map(item => {
+                    return `<p>${item[0]} (빈도수: ${item[1]})</p>`;
+                }).join('');
+                positiveDiv.innerHTML = `<h2>긍정</h2>${positiveList}`;
+
+                // 부정 요소 생성
+                const negativeList = data['부정'].map(item => {
+                    return `<p>${item[0]} (빈도수: ${item[1]})</p>`;
+                }).join('');
+                negativeDiv.innerHTML = `<h2>부정</h2>${negativeList}`;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        
+        // 긍정과 부정의 빈도수 합산
+        const positiveTotal = data['긍정'].reduce((total, item) => total + item[1], 0);
+        const negativeTotal = data['부정'].reduce((total, item) => total + item[1], 0);
+
+        // 총 합산된 값을 이용하여 비율 계산
+        const total = positiveTotal + negativeTotal;
+        const positiveRatio = (positiveTotal / total) * 100;
+        const negativeRatio = (negativeTotal / total) * 100;
+
+        // D3.js를 사용하여 원 그래프 그리기
+        const svg = d3.select('.emo')
+            .append('svg')
+            .attr('width', 200)
+            .attr('height', 200);
+
+        const data = [
+            { label: '긍정', value: positiveRatio },
+            { label: '부정', value: negativeRatio }
+        ];
+
+        const pie = d3.pie()
+            .value(d => d.value)
+            .sort(null);
+
+        const radius = 100;
+        const arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+
+        const color = d3.scaleOrdinal()
+            .domain(data.map(d => d.label))
+            .range(['#81DAF5', '#F78181']);
+
+        const arcs = svg.selectAll('.arc')
+            .data(pie(data))
+            .enter()
+            .append('g')
+            .attr('class', 'arc')
+            .attr('transform', 'translate(100,100)');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => color(d.data.label));
+
+        arcs.append('text')
+            .attr('transform', d => `translate(${arc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .text(d => `${d.data.label} ${(d.data.value).toFixed(2)}%`);
+    </script>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var searchValue = urlParams.get('value');
+
+        // 게시물을 불러오는 함수
+        function fetchPosts() {
+            const apiUrl = 'http://3.34.107.69:8000/board/all'; // 게시물을 가져오는 API 엔드포인트
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const posts = data; // 가져온 게시물 데이터
+                    const keyword = searchValue; // 특정 단어
+                    const filteredPosts = checkForWord(posts, keyword); // 특정 단어를 포함하는 게시물 필터링
+
+                    // 제목을 포스트에 띄우는 함수 호출
+                    displayPostTitles(filteredPosts);
+                })
+                .catch(error => {
+                    console.error('Error fetching posts:', error);
+                });
+        }
+
+        // title에 특정 단어가 있는지 확인하는 함수
+        function checkForWord(posts, word) {
+            const filteredPosts = posts.filter(post => post.title.includes(word));
+            return filteredPosts;
+        }
+
+        // 제목을 포스트에 띄우는 함수
+        function displayPostTitles(posts) {
+    const postContainer = document.querySelector('.post');
+
+    if (posts.length === 0) {
+        // 게시물이 없을 때의 처리
+        const noPostDiv = document.createElement('div');
+        noPostDiv.innerHTML = `<h3>게시물이 없습니다.</h3>`;
+        postContainer.appendChild(noPostDiv);
+    } else {
+        // 게시물이 있을 때의 처리
+        posts.slice(0, 8).forEach(post => {
+            const postLink = document.createElement('a');
+            postLink.href = `post.html?id=${post.id}`;
+            postLink.innerHTML = `<h3>${post.title}</h3>`;
+            postContainer.appendChild(postLink);
+        });
+    }
+}
+
+// 페이지 로드 시 게시물 불러오기
+window.onload = function() {
+    fetchPosts();
+};
+    </script>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

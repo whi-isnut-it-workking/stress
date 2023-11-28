@@ -23,12 +23,14 @@ def get_db():
         print("Board DB Session Closed")
         db.close()
 
+# Header
 def get_password_from_header(password: str = Header(...)):
     return password
 
 def get_current_user_password(password: Header = Depends(get_password_from_header)):
     return password
 
+# APIs
 # id와 일치하는 게시글 한 개를 읽는 API
 @router.get("/{board_id:int}", response_model=schema.Board, tags=["boards"])
 def read_one_board_api(

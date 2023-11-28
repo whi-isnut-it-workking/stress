@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #9CB4D4;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            border-bottom: 10px solid #75F46B;
+            z-index: 900;
+        }
+
+        .navbar a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 0px 20px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .navbar a:first-child {
+            float: left;
+            margin-left: 6%;
+        }
+
+        .navbar .menu:hover {
+            color: #F1EBEA;
+        }
+
+        .navbar img {
+            margin-top: 5px;
+            width: 130px;
+            height: 50px;
+        }
+
+        .menu {
+            margin-top: 15px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        section.notice {
+            padding: 80px 0;
+        }
+
+        .page-title {
+            margin-top: 10%;
+            margin-bottom: 60px;
+        }
+
+        .page-title h3 {
+            font-size: 28px;
+            color: #333333;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        #board-search .search-window {
+            padding: 15px 0;
+            background-color: #f9f7f9;
+        }
+
+        #board-search .search-window .search-wrap {
+            position: relative;
+            /*   padding-right: 124px; */
+            margin: 0 auto;
+            width: 80%;
+            max-width: 564px;
+        }
+
+        #board-search .search-window .search-wrap input {
+            height: 40px;
+            width: 100%;
+            font-size: 14px;
+            padding: 7px 14px;
+            border: 1px solid #ccc;
+        }
+
+        #board-search .search-window .search-wrap input:focus {
+            border-color: #333;
+            outline: 0;
+            border-width: 1px;
+        }
+
+        #board-search .search-window .search-wrap .btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 108px;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .board-table {
+            font-size: 13px;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .board-table a {
+            color: #333;
+            display: inline-block;
+            line-height: 1.4;
+            word-break: break-all;
+            vertical-align: middle;
+        }
+
+        .board-table a:hover {
+            text-decoration: underline;
+        }
+
+        .board-table th {
+            text-align: center;
+        }
+
+        .board-table .th-num {
+            width: 100px;
+            text-align: center;
+        }
+
+        .board-table .th-date {
+            width: 200px;
+        }
+
+        .board-table th,
+        .board-table td {
+            padding: 14px 0;
+        }
+
+        .board-table tbody td {
+            border-top: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .board-table tbody th {
+            padding-left: 28px;
+            padding-right: 14px;
+            border-top: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .board-table tbody th p {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0 30px;
+            font-size: 15px;
+            font-weight: 400;
+            background: transparent;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            text-transform: uppercase;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        .btn-dark {
+            background: #555;
+            color: #fff;
+        }
+
+        .btn-dark:hover,
+        .btn-dark:focus {
+            background: #373737;
+            border-color: #373737;
+            color: #fff;
+        }
+
+        /* reset */
+
+        * {
+            list-style: none;
+            text-decoration: none;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .container {
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        .blind {
+            position: absolute;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            margin: -1px;
+            width: 1px;
+            height: 1px;
+        }
+
+        .notice_btn {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .notice_num {
+            font-size: 15px;
+            padding: 5px;
+            height: 30px;
+            width: 30px;
+        }
+
+        .write {
+            float: right;
+            font-size: 13px;
+            padding: 5px;
+            height: 30px;
+            width: 55px;
+        }
+        
+        .modal {
+            display: none;
+            /* 기본적으로 모달은 숨겨진 상태 */
+            position: fixed;
+            /* 고정 위치 */
+            z-index: 9999;
+            /* 다른 요소 위에 표시되도록 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* 모달 크기가 화면을 벗어나면 스크롤을 제공 */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 투명도를 조절한 배경색 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            margin: 0 auto;
+            /* 화면 중앙에 위치하도록 수정 */
+            width: 100%;
+            /* 모달 창의 너비 조정 */
+            height: 100%;
+            /* 모달 창의 높이 조정 */
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 50%;
+            /* 이미지 크기를 50%로 축소 */
+            height: auto;
+            /* 가로 세로 비율 유지 */
+            float: left;
+            /* 왼쪽으로 배치 */
+            margin-left: 5%;
+            margin-top: 10%;
+        }
+
+        .cycle_btn {
+            overflow-y: auto;
+            max-height: 50%;
+            /* 버튼들이 표시될 최대 높이 설정 */
+            margin-top: 13%;
+        }
+
+        .scrollable-content {
+            /* 스크롤 가능한 영역 스타일 설정 */
+            display: flex;
+            flex-direction: column;
+            /* 버튼을 수평으로 배치 */
+            justify-content: flex-end;
+            /* 버튼을 오른쪽 끝에 배치 */
+            align-items: center;
+            /* 버튼들을 수직 가운데로 정렬 */
+        }
+
+        .scrollable-content button {
+            background-color: #2E2E2E;
+            color: white;
+            font-size: 25px;
+            width: 500px
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            left: calc(100% - 60px);
+            font-size: 60px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html"><img src="logo.JPG"></a>
+        <a href="noticeboard.html" class="menu" style="margin-right: 8%;">Gallery</a>
+        <a href="#" class="menu" onclick="openModal()">Hype Cycle</a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="cycle.png">
+            <div class="cycle_btn">
+                <div class="scrollable-content">
+                    <button>cybersecurity mesh architecture</button>
+                    <button>generative cybersecurity ai</button>
+                    <button>gitops</button>
+                    <button>augmented finops</button>
+                    <button>neurosymbolic ai</button>
+                    <button>post quantum cryptography</button>
+                    <button>causal ai</button>
+                    <button>ai simulation</button>
+                    <button>graph data science</button>
+                    <button>cloud development environment</button>
+                    <button onclick="redirectToResult('강화학습')">reinforcement learning</button>
+                    <button>value stream management platforms</button>
+                    <button>homomorphic encryption</button>
+                    <button>cloud sustainability</button>
+                    <button>internal developer platform</button>
+                    <button>federated machine learning</button>
+                    <button onclick="redirectToResult('웹어셈블리')">webassembly</button>
+                    <button>ai trism</button>
+                    <button>cloud-out to edge</button>
+                    <button>open-source program office</button>
+                    <button>api-centric saas</button>
+                    <button onclick="redirectToResult('생성형ai')">generative ai</button>
+                    <button>ai augmented software engineering</button>
+                    <button>cloud native</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="notice">
+        <div class="page-title">
+            <div class="container">
+                <h3>Gallery</h3>
+            </div>
+        </div>
+
+        <!-- board list area -->
+        <div id="board-list">
+            <div class="container">
+                <table class="board-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="th-num">번호</th>
+                            <th scope="col" class="th-title">제목</th>
+                            <th scope="col" class="th-auther">작성자</th>
+                            <th scope="col" class="th-date">등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody id="postList">
+                        <!-- 게시물 목록이 여기에 동적으로 추가될 것입니다 -->
+                    </tbody>
+                </table>
+                <div class="notice_btn">
+                    <button type="button" class="notice_num">1</button>
+                    <button type="button" class="notice_num">2</button>
+                    <button type="button" class="notice_num">3</button>
+                    <button type="button" class="notice_num">4</button>
+                    <button type="button" onclick="location.href='noticewrite.html'" class="write">글쓰기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function redirectToResult(value) {
+            // encodeURIComponent를 사용하여 값에 포함된 특수 문자를 인코딩합니다.
+            const encodedValue = encodeURIComponent(value);
+            // 새로운 URL을 생성하고 해당 페이지로 이동합니다.
+            window.location.href = `result.html?value=${encodedValue}`;
+        }
+    </script>
+    
+    <script>
+            async function fetchData() {
+                const response = await fetch(`http://3.34.107.69:8000/board/all`);
+                const data = await response.json();
+                const sortedData = data.sort((a, b) => b.id - a.id).slice(0, 10); // ID를 기준으로 내림차순 정렬하고 10개만 가져오기
+                return sortedData;
+            }
+
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = `0${date.getMonth() + 1}`.slice(-2);
+                const day = `0${date.getDate()}`.slice(-2);
+                return `${year}.${month}.${day}`;
+            }
+
+            function displayPosts(posts) {
+                const tableBody = document.getElementById('postList');
+                tableBody.innerHTML = ''; // 이전 내용 지우기
+
+                posts.forEach(post => {
+                    const formattedDate = formatDate(post.date);
+                    const row = `
+                        <tr>
+                            <td>${post.id}</td>
+                            <td><a href="post.html?id=${post.id}">${post.title}</a></td>
+                            <td>${post.username}</td>
+                            <td>${formattedDate}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // 초기 로드 (10개의 데이터 표시)
+            fetchData()
+                .then(posts => {
+                    displayPosts(posts);
+                })
+                .catch(error => {
+                    console.error('데이터 가져오는 중 에러 발생:', error);
+                });
+        </script>
+    
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
