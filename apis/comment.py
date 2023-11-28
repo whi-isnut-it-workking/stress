@@ -23,12 +23,14 @@ def get_db():
         print("Comment DB Session Closed")
         db.close()
 
+# Header
 def get_password_from_header(password: str = Header(...)):
     return password
 
 def get_current_user_password(password: Header = Depends(get_password_from_header)):
     return password
 
+# APIs
 # id와 일치하는 댓글 한 개를 읽는 API
 @router.get("/{comment_id:int}", response_model=schema.Comment, tags=["comments"])
 def read_one_comment_api(
