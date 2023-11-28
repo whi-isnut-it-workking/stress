@@ -1,9 +1,12 @@
 # stress
 문서 작성자 : 윤준현  
 최종 수정자 : 윤준현  
-최종 수정일 : 2023.11.21  
+최종 수정일 : 2023.11.28  
+
+프로젝트 이름 : GATI
+- Gartner + IT  
   
-캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 백엔드 API 저장소  
+캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 저장소  
   
 참여인원 : 3명 - 윤준현(ikaman3), 이민재(dlalswo5644), 강민호(SincereSnail)  
 작업 기간 : 2023.09.20 ~ 2023.11.26 (약 2개월)  
@@ -40,10 +43,15 @@ uvicorn main:app --reload
 ```
 python -m uvicorn main:app --reload
 ```  
+외부 접근 허용  
+```
+python -m uvicorn main:app --reload --host=0.0.0.0
+```  
 - main : 파일 main.py (파이썬 "모듈"). 확장자가 .py이라면 다른 이름으로도 가능하다.
 - app : main.py 내부의 app = FastAPI() 줄에서 생성한 오브젝트. 오브젝트 이름을 app 이외의 다른 이름으로 선언했다면 그 이름을 사용한다.
 - --reload : 코드 변경 후 서버 재시작. 개발에만 사용한다.
-  
+- --host : 서버가 바인딩될 호스트를 지정하는 데 사용. 서버가 수신 대기할 IP 주소를 나타내며, 기본적으로 127.0.0.1 또는 localhost로 설정된다. ```--host=0.0.0.0```은 모든 네트워크 인터페이스에서 서버가 수신 대기하도록 지정한다. 이렇게 하면 외부에서도 서버에 접근할 수 있게 된다.
+    
 ### API Test Docs
 FastAPI는 Swagger UI를 사용하여 자동 대화형 API 문서를 제공한다. 해당 문서에서 빠르게 API를 테스트할 수 있다.  
 서버를 시작하고 아래의 링크를 브라우저에 입력하여 접속한다.  
@@ -153,3 +161,14 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 - -p : password 입력 옵션
 - -h : Host name을 지정하는 옵션. 서버 관리자가 알려준 RDS의 Endpoint를 입력한다
 - ex) ```mysql -u zelda -p -h mydb.tearsofthekingdom.ap-northeast-2.rds.amazonaws.com```
+
+## Result
+![메인페이지_상단](result/0_0.png)
+![메인페이지_하단](result/0_1.png)
+![하이퍼사이클](result/1.png)
+![연관어분석](result/2.png)
+![워드클라우드](result/3.png)
+![감정분석](result/4.png)
+![관련게시물](result/5.png)
+  
+[final_presentation.pdf](result/final_presentation.pdf)
