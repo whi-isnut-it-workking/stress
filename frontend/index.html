@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mainpage</title>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #9CB4D4;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            border-bottom: 10px solid #75F46B;
+            z-index: 900;
+        }
+
+        .navbar a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 0px 20px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .navbar a:first-child {
+            float: left;
+            margin-left: 6%;
+        }
+
+        .navbar .menu:hover {
+            color: #F1EBEA;
+        }
+
+        .navbar img {
+            margin-top: 5px;
+            width: 130px;
+            height: 50px;
+        }
+
+        .menu {
+            margin-top: 15px;
+        }
+
+        .main {
+            margin-top: 10%;
+        }
+
+        .main_text {
+            float: left;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+
+        .main_img {
+            float: right;
+            width: 50%;
+            margin-right: 5%;
+        }
+
+        .main_img img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+        }
+
+        .about {
+            margin-top: 5%;
+            text-align: center;
+            background-color: #2EFEF7;
+            font-size: 25px;
+        }
+
+        .about_cycle {
+            margin: 5%;
+            font-size: 25px;
+        }
+
+        .step {
+            margin: 5%;
+            font-size: 20px;
+        }
+
+        .news {
+            margin: 5%;
+        }
+
+        .news h1 {
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            /* 기본적으로 모달은 숨겨진 상태 */
+            position: fixed;
+            /* 고정 위치 */
+            z-index: 9999;
+            /* 다른 요소 위에 표시되도록 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* 모달 크기가 화면을 벗어나면 스크롤을 제공 */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 투명도를 조절한 배경색 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            margin: 0 auto;
+            /* 화면 중앙에 위치하도록 수정 */
+            width: 100%;
+            /* 모달 창의 너비 조정 */
+            height: 100%;
+            /* 모달 창의 높이 조정 */
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 50%;
+            /* 이미지 크기를 50%로 축소 */
+            height: auto;
+            /* 가로 세로 비율 유지 */
+            float: left;
+            /* 왼쪽으로 배치 */
+            margin-left: 5%;
+            margin-top: 10%;
+        }
+
+        .cycle_btn {
+            overflow-y: auto;
+            max-height: 50%;
+            /* 버튼들이 표시될 최대 높이 설정 */
+            margin-top: 13%;
+        }
+
+        .scrollable-content {
+            /* 스크롤 가능한 영역 스타일 설정 */
+            display: flex;
+            flex-direction: column;
+            /* 버튼을 수평으로 배치 */
+            justify-content: flex-end;
+            /* 버튼을 오른쪽 끝에 배치 */
+            align-items: center;
+            /* 버튼들을 수직 가운데로 정렬 */
+        }
+
+        .scrollable-content button {
+            background-color: #2E2E2E;
+            color: white;
+            font-size: 25px;
+            width: 500px
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            left: calc(100% - 60px);
+            font-size: 60px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .news_name a {
+          text-decoration: none; /* 링크의 밑줄 제거 */
+          color: inherit; /* 부모 요소의 색상을 상속받음 */
+          transition: color 0.3s;
+            font-size: 20px;
+        }
+
+        .news_name a:hover {
+          color: blue; /* 호버시에 색상을 변경합니다. */
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html"><img src="logo.JPG"></a>
+        <a href="noticeboard.html" class="menu" style="margin-right: 8%;">Gallery</a>
+        <a href="#" class="menu" onclick="openModal()">Hype Cycle</a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="cycle.png">
+            <div class="cycle_btn">
+                <div class="scrollable-content">
+                    <button>cybersecurity mesh architecture</button>
+                    <button>generative cybersecurity ai</button>
+                    <button>gitops</button>
+                    <button>augmented finops</button>
+                    <button>neurosymbolic ai</button>
+                    <button>post quantum cryptography</button>
+                    <button>causal ai</button>
+                    <button>ai simulation</button>
+                    <button>graph data science</button>
+                    <button>cloud development environment</button>
+                    <button onclick="redirectToResult('강화학습')">reinforcement learning</button>
+                    <button>value stream management platforms</button>
+                    <button>homomorphic encryption</button>
+                    <button>cloud sustainability</button>
+                    <button>internal developer platform</button>
+                    <button>federated machine learning</button>
+                    <button onclick="redirectToResult('웹어셈블리')">webassembly</button>
+                    <button>ai trism</button>
+                    <button>cloud-out to edge</button>
+                    <button>open-source program office</button>
+                    <button>api-centric saas</button>
+                    <button onclick="redirectToResult('생성형ai')">generative ai</button>
+                    <button>ai augmented software engineering</button>
+                    <button>cloud native</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main_text">
+            <h1>하이퍼 사이클의 최신 기술<br>동향을 분석하고,<br>다양한 전문가들과 생각을<br>공유하는 곳입니다.<br>미래를 준비하는데 필요한<br>기술적 통찰력과<br>트렌드를 함께 살펴보세요!</h1>
+        </div>
+        <div class="main_img">
+            <img src="cycle.png">
+        </div>
+    </div>
+
+    <div class="about">
+        <h1>Hype Cycle이란?</h1>
+        <div class="about_cycle">
+            <p>하이프 사이클(Hype Cycle)은 기술의 성숙도를 표현하기 위한 시각적 도구이다. 과대광고 주기라고도 한다.미국의 정보 기술 연구 및 자문 회사인 가트너에서 개발하였다.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <h3>주요 단계 이해하기</h3>
+        <div class="about_step">
+            <p>기술의 출현 (Technology Trigger): 새로운 기술이나 제품이 등장하여 초기 관심을 끌고 사용 가능성이 높아짐.<br><br>
+                기대치의 정점 (Peak of Inflated Expectations): 기대치가 최고조에 달하여 기술이나 제품에 대한 기대와 활발한 관심이 많아짐.<br><br>
+                실망의 몰락 (Trough of Disillusionment): 초기 기대에 비해 실제 결과가 부진하여 실망을 경험하고 관심이 줄어듦.<br><br>
+                기술의 부상 (Slope of Enlightenment): 기술이나 제품의 실제 가치가 인정받고, 실용적인 적용이 발견되어 채택되는 단계.<br><br>
+                생산성 평원 (Plateau of Productivity): 기술이나 제품이 일반적으로 채택되어 안정적으로 사용되는 단계.</p>
+        </div>
+    </div>
+
+    <div class="news">
+        <h1>한국 최신 IT 뉴스</h1>
+        <div class="news_name"></div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        function redirectToResult(value) {
+            // encodeURIComponent를 사용하여 값에 포함된 특수 문자를 인코딩합니다.
+            const encodedValue = encodeURIComponent(value);
+            // 새로운 URL을 생성하고 해당 페이지로 이동합니다.
+            window.location.href = `result.html?value=${encodedValue}`;
+        }
+    </script>
+    
+    <script>
+        fetch('http://3.34.107.69:8000/utils/news')
+            .then(response => response.json())
+            .then(data => {
+                const newsContainer = document.querySelector('.news_name');
+
+                data.forEach(news => {
+                    const newsLink = document.createElement('a');
+                    newsLink.href = news.href;
+                    newsLink.textContent = news.title;
+                    newsLink.target = "_blank"; // 새 창에서 링크 열기
+
+                    const newsItem = document.createElement('p');
+                    newsItem.appendChild(newsLink);
+
+                    newsContainer.appendChild(newsItem);
+                });
+            })
+            .catch(error => {
+                console.error('데이터를 가져오는 중 오류 발생:', error);
+            });
+    </script>
+</body>
+
+</html>
