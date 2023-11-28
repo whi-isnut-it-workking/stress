@@ -76,9 +76,10 @@ def art_crawl(href):
 
 @router.get("/gpt", tags=["utils"])
 def gpt_answer(question: str):
-    questionEN = get_translate_KRtoEN(question)
-    answerEN = get_answer(questionEN)
-    answerKR = get_translate_ENtoKR(answerEN)
+    # questionEN = get_translate_KRtoEN(question)
+    # answerEN = get_answer(questionEN)
+    # answerKR = get_translate_ENtoKR(answerEN)
+    answerKR = get_answer(question)
     return answerKR
 
 @router.get("/news", tags=["utils"])

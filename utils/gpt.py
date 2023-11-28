@@ -69,7 +69,7 @@ def get_answer(translatedText: str):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "Answer Gartner's IT analysis data questions."},
+            {"role": "system", "content": "Answer Gartner's IT analysis data questions. Please always respond in Korean"},
             {"role": "user", "content": translatedText}
         ]
     )
