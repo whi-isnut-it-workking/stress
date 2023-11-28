@@ -1,9 +1,12 @@
 # stress
 문서 작성자 : 윤준현  
 최종 수정자 : 윤준현  
-최종 수정일 : 2023.11.21  
+최종 수정일 : 2023.11.28  
+
+프로젝트 이름 : GATI
+- Gartner + IT  
   
-캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 백엔드 API 저장소  
+캡스톤디자인 팀 '외않됀데?'의 팀프로젝트 주제 'Gartner로 보는 한국 IT 기술 트렌드'의 저장소  
   
 참여인원 : 3명 - 윤준현(ikaman3), 이민재(dlalswo5644), 강민호(SincereSnail)  
 작업 기간 : 2023.09.20 ~ 2023.11.26 (약 2개월)  
@@ -153,3 +156,13 @@ Windows는 기본으로 제공되는 pem 파일을 쓸 수 없으므로 ppk 파�
 - -p : password 입력 옵션
 - -h : Host name을 지정하는 옵션. 서버 관리자가 알려준 RDS의 Endpoint를 입력한다
 - ex) ```mysql -u zelda -p -h mydb.tearsofthekingdom.ap-northeast-2.rds.amazonaws.com```
+
+## Result
+![메인페이지_상단](./result/0_0.png)
+![메인페이지_하단](./result/0_1.png)
+![하이퍼사이클](./result/1.png)
+![연관어분석](./result/2.png)
+![워드클라우드](./result/3.png)
+![감정분석](./result/4.png)
+![관련게시물](./result/5.png)
+![최종발표자료](./result/최종발표_pdf)
