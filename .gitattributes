@@ -1,0 +1,10 @@
+csvfiles/ filter=lfs diff=lfs merge=lfs -text
+association_model.model filter=lfs diff=lfs merge=lfs -text
+association_model.model.syn1neg.npy filter=lfs diff=lfs merge=lfs -text
+association_model.model.wv.vectors.npy filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_ac.csv filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_ad.csv filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_ae.csv filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_af.csv filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_aa.csv filter=lfs diff=lfs merge=lfs -text
+csvfiles/chunk_ab.csv filter=lfs diff=lfs merge=lfs -text
