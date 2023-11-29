@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Date, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
 from database.db import Base
@@ -33,3 +33,23 @@ class Comment(Base):
     board_index = Column(Integer, ForeignKey("board.id"), nullable=False)
     
     board = relationship("Board", back_populates="comments")
+
+# 데이터 테이블 모델
+class Data(Base):
+    __tablename__ = "data"
+
+    id = Column(Integer, primary_key=True, index=True)
+    date = Column(Date)
+    body = Column(Text)
+    section = Column(String(3))
+    url = Column(String(200))
+    title = Column(String(200))
+
+# 전처리 모델
+class Preprocessing(Base):
+    __tablename__ = "preprocessing"
+
+    id = Column(Integer, primary_key=True, index=True)
+    date = Column(Date)
+    for_wordcloud = Column(Text)
+    for_word_association_analysis = Column(Text)
