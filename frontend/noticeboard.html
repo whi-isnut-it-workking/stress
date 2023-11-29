@@ -428,7 +428,7 @@
     
     <script>
             async function fetchData() {
-                const response = await fetch(`http://3.34.107.69:8000/board/all`);
+                const response = await fetch(`http://localhost:8000/board/all`);
                 const data = await response.json();
                 const sortedData = data.sort((a, b) => b.id - a.id).slice(0, 10); // ID를 기준으로 내림차순 정렬하고 10개만 가져오기
                 return sortedData;
