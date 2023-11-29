@@ -459,7 +459,7 @@
     // 가져온 값이 있을 때만 데이터를 보내는 함수 호출
     if (searchValue) {
         const combinedValue = `what is ${searchValue}`;
-        const url = `http://3.34.107.69:8000/utils/gpt?question=${combinedValue}`;
+        const url = `http://localhost:8000/utils/gpt?question=${combinedValue}`;
 
         fetch(url)
             .then(response => response.text())
@@ -497,7 +497,7 @@
 
     // API로 데이터를 전송하고 응답 받는 함수
     function sendDataToAPI(question) {
-        const url = `http://3.34.107.69:8000/utils/gpt?question=${question}`;
+        const url = `http://localhost:8000/utils/gpt?question=${question}`;
 
         fetch(url)
             .then(response => response.text())
@@ -525,7 +525,7 @@
     <script>
         var urlParams = new URLSearchParams(window.location.search);
         var searchValue = urlParams.get('value');
-        const url = `http://121.128.211.44:8000/ai/result_ass_model?keyword=${searchValue}`;
+        const url = `http://localhost:8000/ai/result_ass_model?keyword=${searchValue}`;
 
         fetch(url)
             .then(response => response.json())
@@ -636,7 +636,7 @@
         const word = searchValue; // 검색하고자 하는 단어
         const width = 900; // 이미지 너비
         const height = 600; // 이미지 높이
-        const apiUrl = `http://121.128.211.44:8000/wc/make_wordcloud?keyword=${word}&wd=${width}&hg=${height}`;
+        const apiUrl = `http://localhost:8000/wordcloud/make_wordcloud?keyword=${word}&wd=${width}&hg=${height}`;
 
         fetch(apiUrl)
             .then(response => {
@@ -652,7 +652,7 @@
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-        const url1 = `http://121.128.211.44:8000/ai/result_emo_model?keyword=${searchValue}`;
+        const url1 = `http://localhost:8000/ai/result_emo_model?keyword=${searchValue}`;
         fetch(url1)
             .then(response => response.json()) // JSON 형식으로 변환
             .then(data => {
@@ -731,7 +731,7 @@
 
         // 게시물을 불러오는 함수
         function fetchPosts() {
-            const apiUrl = 'http://3.34.107.69:8000/board/all'; // 게시물을 가져오는 API 엔드포인트
+            const apiUrl = 'http://localhost:8000/board/all'; // 게시물을 가져오는 API 엔드포인트
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {

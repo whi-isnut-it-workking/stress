@@ -388,7 +388,7 @@
             const postMeta = document.querySelector('.post-meta');
             const postContent = document.querySelector('.post-content');
 
-            fetch(`http://3.34.107.69:8000/board/${postId}`)
+            fetch(`http://localhost:8000/board/${postId}`)
                 .then(response => response.json())
                 .then(data => {
                     // 가져온 데이터를 각 요소에 할당
@@ -416,7 +416,7 @@
             const postId = getIdFromURL();
             const commentSection = document.querySelector('.comment-section');
 
-            fetch(`http://3.34.107.69:8000/board/${postId}/comment/all`)
+            fetch(`http://localhost:8000/board/${postId}/comment/all`)
                 .then(response => response.json())
                 .then(comments => {
                     comments.forEach(comment => {
@@ -474,7 +474,7 @@
                     password: commentPassword,
                 };
 
-                fetch(`http://3.34.107.69:8000/board/${postId}/comment`, {
+                fetch(`http://localhost:8000/board/${postId}/comment`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -501,7 +501,7 @@
             const deletePassword = document.getElementById('deletePassword').value;
 
             deletePostButton.addEventListener('click', function() {
-                const url = `http://3.34.107.69:8000/board/${postId}`;
+                const url = `http://localhost:8000/board/${postId}`;
                 fetch(url, {
                     method: 'DELETE',
                     headers: {

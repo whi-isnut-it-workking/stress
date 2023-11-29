@@ -48,7 +48,7 @@ def insert_data(db: Session = Depends(get_db)):
 	df['combined_text'] = df['body'] + ' ' + df['title']
 
 	# 명사를 추출하기 위해 텍스트를 결합한 후에 Okt를 사용합니다.
-	with open(r"/Users/main/coding/stress/stress/lib/python3.11/site-packages/konlpy/java/addwords.txt",'r',encoding='utf-8') as f:
+	with open(r"texts/addwords.txt",'r',encoding='utf-8') as f:
 		words = f.read()
 
 	wordss = words.split("\n")
@@ -110,7 +110,7 @@ def insert_data_with_keyowrd(db: Session = Depends(get_db), keyword : str = ""):
 	df['combined_text'] = df['body'] + ' ' + df['title']
 
 	# 명사를 추출하기 위해 텍스트를 결합한 후에 Okt를 사용합니다.
-	with open(r"/Users/main/coding/stress/stress/lib/python3.11/site-packages/konlpy/java/addwords.txt",'r',encoding='utf-8') as f:
+	with open(r"texts/addwords.txt",'r',encoding='utf-8') as f:
 		words = f.read()
 
 	wordss = words.split("\n")
