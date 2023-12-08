@@ -1,7 +1,7 @@
 # apis
 문서 작성자 : 윤준현  
 최종 수정자 : 윤준현  
-최종 수정일 : 2023.11.19  
+최종 수정일 : 2023.12.07  
   
 API 라우터 내용을 설명해둔 README  
   
@@ -10,7 +10,7 @@ API 라우터 내용을 설명해둔 README
 - {board_id:int}: Path Parameter의 type을 명시적으로 지정하는 FastAPI의 기능
 - tags: FastAPI docs의 라우트별 태그 구분
   
-## board_router.py
+## board.py
 게시글 기능을 담당하는 API  
 ### read_one_board_api
 id와 일치하는 게시글 한 개를 읽는 API  
@@ -134,7 +134,12 @@ Response ex)
   "tag": "string"
 }
 ```  
-## comment_router.py
+### increment_like
+추천 수를 1 증가  
+### increment_dislike
+비추천 수를 1 증가
+
+## comment.py
 댓글 기능 담당 API  
   
 ### read_one_comment_api
@@ -230,7 +235,7 @@ Response ex)
   "board_index": 28
 }
 ```  
-## utils_router.py
+## utils.py
 기타 기능을 위한 API  
 ### gpt_answer
 GPT API를 사용해서 답변을 받아옴  
@@ -242,3 +247,32 @@ Response ex)
 ```
 "GPT의 답변\n\n1.어쩌고\n\n2.저쩌고..."
 ```  
+
+## data.py
+DB data 테이블에 수집한 데이터를 삽입하는 API  
+### read_data
+data 테이블의 모든 레코드를 읽음  
+### insert_data
+특정 폴더에 있는 csv 파일을 읽어서 data 테이블에 삽입  
+  
+## preprocessing.py
+data 테이블의 레코드를 읽어서 전처리 후 preprocessing 테이블의 레코드를 관리하는 API  
+### read_data
+data 테이블로부터 레코드를 읽고 전처리가 완료된 단어 데이터를 불러옴  
+### insert_data
+data 테이블로부터 레코드를 읽고 전처리가 완료된 단어 데이터를 preprocessing 테이블에 넣음  
+### insert_data_with_keyowrd
+data 테이블로부터 레코드를 읽고 전처리가 완료된 단어 데이터를 preprocessing 테이블에 넣음  
+
+## wordcloud.py
+### make_wordcloud
+워드클라우드를 생성하는 API  
+
+## ai.py
+연관어 분석 관련 API
+### train_ass_model
+preprocessing 테이블에서 전처리가 완료된 데이터를 읽고, 연관어 모델을 학습
+### result_ass_model
+학습된 모델을 사용해 연관어 분석 결과를 출력
+### result_emo_model
+학습된 모델을 사용해 감성 분석 결과를 출력
